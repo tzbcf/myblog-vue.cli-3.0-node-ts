@@ -1,0 +1,5 @@
+{
+    "servers": [
+      {"isEnable":true, "server":"./blog/user/index.ts", "name":"blog","versions":"v1"}
+    ]
+}

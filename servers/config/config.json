@@ -1,0 +1,8 @@
+{
+    "name":"server",
+    "author":"terrorblade",
+    "versions":"0.1",
+    "configuration":{
+        "port":8000
+    }
+}

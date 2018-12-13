@@ -1,0 +1,29 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "博客",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -r ts-node/register src/**/*.spec.ts --colors",
+    "debug": "tsc &&  ../servers/dist/bin/www",
+    "start": "ts-node ./bin/www",
+    "dev": "nodemon"
+  },
+  "author": "terrorblade",
+  "license": "ISC",
+  "dependencies": {
+    "@types/koa-router": "^7.0.35",
+    "chalk": "^2.4.1",
+    "koa": "^2.6.2",
+    "koa-router": "^7.4.0",
+    "path": "^0.12.7",
+    "semver": "^5.6.0",
+    "shelljs": "^0.8.3",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.2.2",
+    "webpack": "^4.26.1"
+  },
+  "devDependencies": {
+    "koa-static": "^5.0.0"
+  }
+}

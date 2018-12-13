@@ -1,0 +1,41 @@
+/*
+ * FileName    : launch.json
+ * ProjectName : blog
+ * Author      : terrorblade
+ * Created Date: 2018-12-11 10:47:26
+ * Description : 
+ * -----
+ * Last Modified: 2018-12-11 19:53:08
+ * Modified By  : 
+ * -----
+ * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
+ */
+
+
+
+
+
+
+ {
+    "version": "0.2.0",
+    "configurations": [
+          {
+            "name": "Debug by ts-node",
+            "type": "node",
+            "request": "launch",
+            "args": [
+              "${workspaceRoot}/bin/www.ts"
+            ],
+            "runtimeArgs": [
+              "--nolazy",
+              "-r",
+              "ts-node/register"
+            ],
+            "sourceMaps": true,
+            "cwd": "${workspaceRoot}",
+            "protocol": "inspector",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen"
+          },
+    ]
+  }

@@ -1,0 +1,6 @@
+{
+    "watch": ["../servers"], 
+    "ext": "ts",
+    "ignore": ["node_modules/*",".vscode/*"], 
+    "exec": "npm start" 
+  }
