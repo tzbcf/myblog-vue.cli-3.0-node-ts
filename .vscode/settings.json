@@ -1,0 +1,28 @@
+/*
+ * FileName    : settings.json
+ * ProjectName : .vscode
+ * Author      : terrorblade
+ * Created Date: 2018-12-20 10:54:23
+ * Description : 
+ * -----
+ * Last Modified: 2018-12-20 10:54:47
+ * Modified By  : 
+ * -----
+ * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
+ */
+
+
+
+
+
+
+{
+    "eslint.autoFixOnSave": true,
+    "eslint.validate": [
+        "javascript",{
+            "language": "vue",
+            "autoFix": true
+        },"html",
+        "vue"
+    ]
+}
