@@ -15,15 +15,18 @@
     "@types/koa-router": "^7.0.35",
     "chalk": "^2.4.1",
     "koa": "^2.6.2",
+    "koa-bodyparser": "^4.2.1",
+    "koa-json": "^2.0.2",
+    "koa-logger": "^3.2.0",
+    "koa-onerror": "^4.1.0",
     "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
+    "log4js": "^3.0.6",
     "path": "^0.12.7",
     "semver": "^5.6.0",
     "shelljs": "^0.8.3",
-    "ts-node": "^7.0.1",
     "typescript": "^3.2.2",
     "webpack": "^4.26.1"
   },
-  "devDependencies": {
-    "koa-static": "^5.0.0"
-  }
+  "devDependencies": {}
 }
