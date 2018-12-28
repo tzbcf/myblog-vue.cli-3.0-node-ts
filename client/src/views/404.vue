@@ -5,7 +5,7 @@
  * Created Date: 2018-12-26 14:39:31
  * Description :
  * -----
- * Last Modified: 2018-12-26 16:50:39
+ * Last Modified: 2018-12-28 15:29:42
  * Modified By  :
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
@@ -37,8 +37,6 @@ export default {
 <style lang="stylus" scoped>
 .content {
   height: 100%;
-  position: relative;
-  top: 0px;
   font-size: 14px;
   color: rgba(0, 0, 0, 0.87);
   background: #f5f5f5;

@@ -25,7 +25,7 @@ module.exports = {
   chainWebpack: () => { },
   configureWebpack: () => { },
   // 生产环境是否生成 sourceMap 文件
-  productionSourceMap: true,
+  productionSourceMap: false,
   // css相关配置
   css: {
     // 是否使用css分离插件 ExtractTextPlugin

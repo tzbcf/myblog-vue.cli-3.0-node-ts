@@ -5,7 +5,7 @@
  * Created Date: 2018-12-10 20:16:23
  * Description : 
  * -----
- * Last Modified: 2018-12-24 18:36:23
+ * Last Modified: 2018-12-28 17:44:49
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
@@ -18,11 +18,12 @@ import * as jsonBody from 'koa-json';
 import * as logger from 'koa-logger';
 import * as bodyparser from 'koa-bodyparser';
 import * as onerror from 'koa-onerror';
-
+// import * as historyApiFallback from './middleware/koa2-connect-history-api-fallback';
 const router:any = require('./router/router');
-const log:any = require('./lib/logger')
+const log:any = require('./lib/logger');
 const app:any = new koa();
-
+const historyApiFallback:any = require('./middleware/koa2-connect-history-api-fallback');
+app.use(historyApiFallback());
 onerror(app);
 // 配置静态web服务的中间件
 app.use(koaStatic(path.join(__dirname,'./public')));
@@ -39,6 +40,7 @@ app.use(jsonBody());
 app.use(logger());
 // const router:any = new koaRouter();
 app.use(router.routes()).use(router.allowedMethods());
+
 
 // 报错提示
 app.on('error', (err, ctx) => {
