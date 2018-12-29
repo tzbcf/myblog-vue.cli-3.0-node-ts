@@ -5,14 +5,14 @@
  * Created Date: 2018-12-24 17:39:45
  * Description : 
  * -----
- * Last Modified: 2018-12-24 18:15:48
+ * Last Modified: 2018-12-29 14:39:22
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
  */
 
 
-class Person {
+export class Person {
     constructor() {
        
     }
@@ -24,4 +24,3 @@ class Person {
         return false;
     }
 }
-module.exports = new Person();

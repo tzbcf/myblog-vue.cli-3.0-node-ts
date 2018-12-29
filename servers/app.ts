@@ -5,7 +5,7 @@
  * Created Date: 2018-12-10 20:16:23
  * Description : 
  * -----
- * Last Modified: 2018-12-28 17:44:49
+ * Last Modified: 2018-12-29 17:27:07
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
@@ -15,14 +15,15 @@ import * as koa from 'koa';
 import * as path from 'path';
 import * as koaStatic from 'koa-static';
 import * as jsonBody from 'koa-json';
-import * as logger from 'koa-logger';
+import * as kosLogger from 'koa-logger';
 import * as bodyparser from 'koa-bodyparser';
 import * as onerror from 'koa-onerror';
-// import * as historyApiFallback from './middleware/koa2-connect-history-api-fallback';
-const router:any = require('./router/router');
-const log:any = require('./lib/logger');
+import {historyApiFallback} from './middleware/koa2-connect-history-api-fallback';
+import {router} from './router/router';
+import {Logger} from './lib/logger';
 const app:any = new koa();
-const historyApiFallback:any = require('./middleware/koa2-connect-history-api-fallback');
+const log:any = new Logger();
+
 app.use(historyApiFallback());
 onerror(app);
 // 配置静态web服务的中间件
@@ -30,29 +31,27 @@ app.use(koaStatic(path.join(__dirname,'./public')));
 // middlewares
 app.use(bodyparser({
     enableTypes:['json', 'form', 'text'],
-    onerror(err, ctx) {
+    onerror(err:any, ctx:any) {
+        log.logRes(ctx,JSON.stringify(err));
         ctx.throw('body parse error', 422);
     }
 }));
 //解析Json数据
 app.use(jsonBody());
 //日志输出
-app.use(logger());
+app.use(kosLogger());
 // const router:any = new koaRouter();
 app.use(router.routes()).use(router.allowedMethods());
 
 
 // 报错提示
-app.on('error', (err, ctx) => {
-    console.error('server error', err, ctx)
+app.on('error', (err:any, ctx:any) => {
+    log.logRes(ctx,JSON.stringify(err))
 });
 
-process.on('uncaughtException', (err)=>{
-    log.writeLog({
-        'msg':JSON.stringify(err.stack),
-        'type':'FATAL'
-    })
+process.on('uncaughtException', (err:any)=>{
+    log.logError(JSON.stringify(err.stack),'uncaughtException')
 });
 
-module.exports = app;
+export {app}
 

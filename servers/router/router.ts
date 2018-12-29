@@ -25,4 +25,4 @@ for(let i=0;i<routerConfig.length;i++){
     }
 }
 
-module.exports = router;
+export {router};

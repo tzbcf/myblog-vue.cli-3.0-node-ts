@@ -5,18 +5,20 @@
  * Created Date: 2018-12-28 17:10:26
  * Description : 
  * -----
- * Last Modified: 2018-12-28 17:29:28
+ * Last Modified: 2018-12-29 14:23:39
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
  */
 
 import * as history from 'connect-history-api-fallback';
-module.exports = options => {
-    const middleware = history(options);
+export const historyApiFallback = (opt?:any):any=>{
+    const middleware = history(opt);
     const noop = () => {};
     return async (ctx, next) => {
-        middleware(ctx, null, noop);
+        if(!ctx.path.includes('api')){
+            middleware(ctx, null, noop);
+        }
         await next();
     };
-};
+}

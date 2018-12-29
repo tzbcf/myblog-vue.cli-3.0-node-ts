@@ -5,17 +5,19 @@
  * Created Date: 2018-12-11 10:49:42
  * Description : 
  * -----
- * Last Modified: 2018-12-24 18:22:08
+ * Last Modified: 2018-12-29 17:40:19
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
  */
-const app: any = require('../app.ts');
-const person: any = require('../lib/common');
+import {app} from '../app'
+import {Person} from '../lib/common'
+import * as http from 'http';
+import {Logger} from '../lib/logger'; 
 const config: any = require('../config/config.json');
 const debug: any = require('debug')('demo:server');
-const http: any = require('http');
-
+const person:any = new Person();
+const logger:any = new Logger();
 const port = person.normalizeNum(process.env.PORT || config.configuration.port);
 const server = http.createServer(app.callback());
 
@@ -25,6 +27,7 @@ const server = http.createServer(app.callback());
 
 const onError = (error) => {
     if (error.syscall !== 'listen') {
+        logger.logError(JSON.stringify(error),'error')
         throw error;
     }
 
@@ -36,13 +39,16 @@ const onError = (error) => {
     switch (error.code) {
         case 'EACCES':
             console.error(bind + ' requires elevated privileges');
+            logger.logError(JSON.stringify(error),'EACCES')
             process.exit(1);
             break;
         case 'EADDRINUSE':
             console.error(bind + ' is already in use');
+            logger.logError(JSON.stringify(error),'EADDRINUSE')
             process.exit(1);
             break;
         default:
+            logger.logError(JSON.stringify(error),'onError')
             throw error;
     }
 }
@@ -57,6 +63,7 @@ const onListening = () => {
         ? 'pipe ' + addr
         : 'port ' + addr.port;
     debug('Listening on ' + bind);
+    logger.logInfo('程序启动','onListening');
 }
 
 server.listen(port);

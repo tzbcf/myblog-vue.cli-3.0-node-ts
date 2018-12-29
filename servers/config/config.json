@@ -5,5 +5,11 @@
     "configuration":{
         "port":8000,
         "sysName":"blog"
+    },
+    "mysql":{
+        "host"     : "127.0.0.1",
+        "user"     : "root",
+        "password" : "root",
+        "database" : "blog"
     }
 }
