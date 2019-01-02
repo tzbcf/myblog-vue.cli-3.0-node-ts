@@ -3,6 +3,9 @@
     "port":8080,
     "api":{
         "host":"127.0.0.1",
-        "port":8000
-    }
+        "port":8000,
+        "protocol":"http"
+    },
+    "timeout":5000,
+    "baseURL":""
 }

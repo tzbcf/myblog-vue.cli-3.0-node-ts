@@ -10,6 +10,7 @@
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
  */
+const config = require('./config/config.json')
 module.exports = {
   // 基本路径
   baseUrl: '/',
@@ -46,11 +47,17 @@ module.exports = {
   // webpack-dev-server 相关配置
   devServer: {
     open: process.platform === 'darwin',
-    host: '0.0.0.0',
-    port: 8080,
+    host: config.host,
+    port: config.port,
     https: false,
     hotOnly: false,
-    proxy: null, // 设置代理
+    proxy: {
+      '/api': {
+        target: `${config.api.protocol}://${config.api.host}:${config.api.port}`,
+        ws: false,
+        changeOrigin: false
+      }
+    }, // 设置代理
     before: app => { }
   },
   // 第三方插件配置

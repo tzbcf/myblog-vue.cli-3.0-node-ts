@@ -1,5 +1,10 @@
 {
     "servers": [
-      {"isEnable":true, "server":"./blog/user/index.ts", "name":"blog","versions":"v1"}
+      {"isEnable":true, "server":"./blog/user/index.ts", "name":"blog","versions":"v1"},
+      {"isEnable":true, "server":"./blog/article/index.ts", "name":"blog","versions":"v1"},
+
+
+
+      {"isEnable":true, "server":"./wechat/user/index.ts", "name":"blog","versions":"v1"}
     ]
 }

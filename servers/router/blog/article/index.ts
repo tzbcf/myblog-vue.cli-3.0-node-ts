@@ -2,29 +2,29 @@
  * FileName    : index.ts
  * ProjectName : blog
  * Author      : terrorblade
- * Created Date: 2018-12-12 13:49:12
+ * Created Date: 2019-01-02 15:58:20
  * Description : 
  * -----
- * Last Modified: 2019-01-02 16:02:39
+ * Last Modified: 2019-01-02 16:02:30
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
  */
 
-const login = async(ctx)=>{
-    ctx.body ='成功3333'
+const addArticle = async(ctx)=>{
+    ctx.body ='成功222'
 };
 
 const server = [
     {
-        'name':'login',
+        'name':'addArticle',
         'isEnable':true,
-        'interface':login,
+        'interface':addArticle,
         'type':'get'
     }
 ]
 export={
-    'name':'user',
+    'name':'article',
     'server':server,
-    'describe':'用户'
+    'describe':'文章'
 }
