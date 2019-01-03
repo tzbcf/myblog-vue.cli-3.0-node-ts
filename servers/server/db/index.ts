@@ -5,15 +5,14 @@
  * Created Date: 2019-01-02 15:42:54
  * Description : 
  * -----
- * Last Modified: 2019-01-02 15:55:58
+ * Last Modified: 2019-01-03 16:48:09
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
  */
-const config = require('../config/config.json');
+const config = require('../../config/config.json');
 import * as mysql from 'mysql';
-import {Logger} from '../lib/logger';
-const log:any = new Logger();
+import log from '../lib/logger';
 const mysqlClient = mysql.createPool({
     host: config.mysql.host,
     user: config.mysql.user,
@@ -21,14 +20,14 @@ const mysqlClient = mysql.createPool({
     database: config.mysql.database
 });
 
-exports.query = (sql, values) => {
+const query = (sql) => {
     return new Promise((resolve, reject) => {
         mysqlClient.getConnection((err, connection) => {
             if (err) {
                 reject(err);
                 log.logError(JSON.stringify(err),'mysql');
             } else {
-                connection.query(sql, values, (errs, rows) => {
+                connection.query(sql, (errs, rows) => {
                     if (errs) {
                         reject(errs);
                         log.logError(JSON.stringify(errs),'mysql');
@@ -41,4 +40,4 @@ exports.query = (sql, values) => {
         });
     });
 };
-
+export default query;

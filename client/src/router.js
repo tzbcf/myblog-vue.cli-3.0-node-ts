@@ -14,7 +14,7 @@ export default new Router({
       component: Inexistence
     },
     {
-      path: '/',
+      path: '/home',
       name: 'home',
       component: Home
     },
@@ -24,7 +24,7 @@ export default new Router({
       component: () => import('./views/register.vue')
     },
     {
-      path: '/login',
+      path: '/',
       name: 'login',
       component: () => import('./views/login.vue')
     },

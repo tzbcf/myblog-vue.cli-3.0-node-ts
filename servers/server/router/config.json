@@ -5,6 +5,9 @@
 
 
 
-      {"isEnable":true, "server":"./wechat/user/index.ts", "name":"blog","versions":"v1"}
+      {"isEnable":true, "server":"./wechat/user/index.ts", "name":"blog","versions":"v1"},
+
+
+      {"isEnable":true, "server":"./common/index.ts", "name":"common","versions":"v1"}
     ]
 }

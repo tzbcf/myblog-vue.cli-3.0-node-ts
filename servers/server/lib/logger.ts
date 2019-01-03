@@ -5,7 +5,7 @@
  * Created Date: 2018-12-24 17:57:21
  * Description : 
  * -----
- * Last Modified: 2019-01-02 15:55:00
+ * Last Modified: 2019-01-03 15:14:42
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
@@ -15,8 +15,8 @@ import * as fsex from 'fs-extra';
 import * as fs from 'fs';
 import * as path from 'path';
 
-const config: any = require('../config/config.json');
-const logConfig: any = require('../config/logConfig.json');
+const config: any = require('../../config/config.json');
+const logConfig: any = require('../../config/logConfig.json');
 //判断路径是否存在创建目录
 const confirmPath = (pathStr: string): void => {
     if (!fs.existsSync(pathStr)) {
@@ -44,7 +44,7 @@ log4js.configure(logConfig);
 const resLogger = log4js.getLogger("resLogger");
 const errorLogger = log4js.getLogger("errorLogger");
 const consoleLogger = log4js.getLogger();
-export class Logger {
+class Logger {
     constructor() { }
     replaceLinefeed(str:string):string{
         return str.replace(/\\n/g,'\r\n');
@@ -75,3 +75,4 @@ export class Logger {
         }
     };
 };
+export default new Logger()

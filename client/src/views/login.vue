@@ -5,15 +5,18 @@
  * Created Date: 2018-12-26 16:26:37
  * Description :
  * -----
- * Last Modified: 2018-12-28 16:03:53
+ * Last Modified: 2019-01-03 16:53:03
  * Modified By  :
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
  */
 <template>
     <div class="login">
-        {{Value}}
-        <mceeditor v-model = "Value"></mceeditor>
+        <div>{{value}}</div>
+        <mceeditor v-model = "value"></mceeditor>
+        <div>
+          <button @click="submit">提交</button>
+        </div>
     </div>
 </template>
 <script>
@@ -26,7 +29,23 @@ export default {
   },
   data () {
     return {
-      Value: ''
+      value: ''
+    }
+  },
+  methods:{
+    submit(){
+      const self = this;
+      const data = {
+        'userName':'terrorblade',
+        'type' : '你好',
+        'title' :'随便',
+        'content':self.value
+      }
+      self.axios.post(self.apiJson.addArticle,data).then(result=>{
+        console.log(result)
+      }).catch(err=>{
+        console.log(err)
+      })
     }
   }
 }

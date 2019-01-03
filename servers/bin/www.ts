@@ -5,19 +5,17 @@
  * Created Date: 2018-12-11 10:49:42
  * Description : 
  * -----
- * Last Modified: 2018-12-29 17:40:19
+ * Last Modified: 2019-01-03 15:10:22
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
  */
-import {app} from '../app'
-import {Person} from '../lib/common'
+import app from '../app'
+import person from '../server/lib/common'
 import * as http from 'http';
-import {Logger} from '../lib/logger'; 
+import logger from '../server/lib/logger'; 
 const config: any = require('../config/config.json');
 const debug: any = require('debug')('demo:server');
-const person:any = new Person();
-const logger:any = new Logger();
 const port = person.normalizeNum(process.env.PORT || config.configuration.port);
 const server = http.createServer(app.callback());
 

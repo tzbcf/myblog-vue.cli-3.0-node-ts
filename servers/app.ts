@@ -5,7 +5,7 @@
  * Created Date: 2018-12-10 20:16:23
  * Description : 
  * -----
- * Last Modified: 2018-12-29 17:27:07
+ * Last Modified: 2019-01-03 16:53:31
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
@@ -18,11 +18,12 @@ import * as jsonBody from 'koa-json';
 import * as kosLogger from 'koa-logger';
 import * as bodyparser from 'koa-bodyparser';
 import * as onerror from 'koa-onerror';
-import {historyApiFallback} from './middleware/koa2-connect-history-api-fallback';
-import {router} from './router/router';
-import {Logger} from './lib/logger';
+import logger from './server/lib/logger';
+import router from './server/router/router';
+import historyApiFallback from './middleware/koa2-connect-history-api-fallback';
+
+
 const app:any = new koa();
-const log:any = new Logger();
 
 app.use(historyApiFallback());
 onerror(app);
@@ -32,7 +33,7 @@ app.use(koaStatic(path.join(__dirname,'./public')));
 app.use(bodyparser({
     enableTypes:['json', 'form', 'text'],
     onerror(err:any, ctx:any) {
-        log.logRes(ctx,JSON.stringify(err));
+        logger.logRes(ctx,JSON.stringify(err));
         ctx.throw('body parse error', 422);
     }
 }));
@@ -40,18 +41,19 @@ app.use(bodyparser({
 app.use(jsonBody());
 //日志输出
 app.use(kosLogger());
-// const router:any = new koaRouter();
+//路由
 app.use(router.routes()).use(router.allowedMethods());
 
 
 // 报错提示
 app.on('error', (err:any, ctx:any) => {
-    log.logRes(ctx,JSON.stringify(err))
+    logger.logRes(ctx,JSON.stringify(err));
 });
 
 process.on('uncaughtException', (err:any)=>{
-    log.logError(JSON.stringify(err.stack),'uncaughtException')
+    console.error(JSON.stringify(err.stack));
+    logger.logError(JSON.stringify(err.stack),'uncaughtException');
 });
 
-export {app}
+export default app
 

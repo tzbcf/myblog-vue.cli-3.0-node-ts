@@ -3,15 +3,13 @@
  * ProjectName : client
  * Author      : terrorblade
  * Created Date: 2019-01-02 17:06:57
- * Description : 
- * -----
- * Last Modified: 2019-01-02 18:01:12
- * Modified By  : 
- * -----
+ * Description :  -----
+ * Last Modified: 2019-01-03 11:37:46
+ * Modified By  : -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
  */
 import axios from 'axios'
-import store from './store/store'
+import store from './store'
 const config = require('../config/config.json')
 axios.defaults.timeout = config.timeout
 axios.defaults.baseURL = config.baseURL
@@ -37,7 +35,7 @@ axios.interceptors.response.use(
   }
 )
 
-export class http {
+class Http {
   constructor () {}
   /**
  * 封装get方法
@@ -51,10 +49,18 @@ export class http {
         params: params
       })
         .then(response => {
-          resolve(response.data)
+          if (!response.data.code) {
+            resolve(response.data.datas)
+          } else {
+            reject(response.data)
+          }
         })
         .catch(err => {
-          reject(err)
+          const r = {
+            'code': -1000,
+            'msg': err
+          }
+          reject(r)
         })
     })
   }
@@ -68,9 +74,18 @@ export class http {
     return new Promise((resolve, reject) => {
       axios.post(url, data)
         .then(response => {
-          resolve(response.data)
-        }, err => {
-          reject(err)
+          if (!response.data.code) {
+            resolve(response.data.datas)
+          } else {
+            reject(response.data)
+          }
+        })
+        .catch(err => {
+          const r = {
+            'code': -1000,
+            'msg': err
+          }
+          reject(r)
         })
     })
   }
@@ -84,10 +99,20 @@ export class http {
     return new Promise((resolve, reject) => {
       axios.put(url, data)
         .then(response => {
-          resolve(response.data)
-        }, err => {
-          reject(err)
+          if (!response.data.code) {
+            resolve(response.data.datas)
+          } else {
+            reject(response.data)
+          }
+        })
+        .catch(err => {
+          const r = {
+            'code': -1000,
+            'msg': err
+          }
+          reject(r)
         })
     })
   }
 }
+export const Axios = new Http()
