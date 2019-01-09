@@ -1,11 +1,11 @@
 /*
  * FileName    : launch.json
- * ProjectName : blog
+ * ProjectName : koa-ts
  * Author      : terrorblade
- * Created Date: 2018-12-11 10:47:26
+ * Created Date: 2019-01-08 15:30:19
  * Description : 
  * -----
- * Last Modified: 2018-12-28 17:39:28
+ * Last Modified: 2019-01-08 15:47:44
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
@@ -16,26 +16,29 @@
 
 
 
- {
-  "version": "0.2.0",
-  "configurations": [
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
         {
-          "name": "Debug by ts-node",
-          "type": "node",
-          "request": "launch",
-          "args": [
-            "${workspaceRoot}/bin/www.ts"
-          ],
-          "runtimeArgs": [
-            "--nolazy",
-            "-r",
-            "ts-node/register"
-          ],
-          "sourceMaps": true,
-          "cwd": "${workspaceRoot}",
-          "protocol": "inspector",
-          "console": "integratedTerminal",
-          "internalConsoleOptions": "neverOpen"
-        },
-  ]
+            "name": "Debug by ts-node",
+            "type": "node",
+            "request": "launch",
+            "args": [
+              "${workspaceRoot}/bin/www.ts"
+            ],
+            "runtimeArgs": [
+              "--nolazy",
+              "-r",
+              "ts-node/register"
+            ],
+            "sourceMaps": true,
+            "cwd": "${workspaceRoot}",
+            "protocol": "inspector",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen"
+          }
+    ]
 }

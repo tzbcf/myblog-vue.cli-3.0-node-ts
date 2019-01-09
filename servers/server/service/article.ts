@@ -1,21 +1,25 @@
 /**
  * FileName    : article.ts
- * ProjectName : blog
+ * ProjectName : koa-ts
  * Author      : terrorblade
- * Created Date: 2019-01-03 16:19:11
+ * Created Date: 2019-01-09 10:39:13
  * Description : 
  * -----
- * Last Modified: 2019-01-04 15:50:20
+ * Last Modified: 2019-01-09 10:50:46
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
  */
-import modelArticle from '../mode/article'
-class article {
-    async addArticle(data){
-        console.log(data)
-        const result = await modelArticle.addArticle(data);
+
+import model from '../model/article';
+import {ACTICLE_DETAILS} from '../interface/article';
+class service {
+    constructor(){
+
+    };
+    async addArticle(data:ACTICLE_DETAILS){
+        const result = await model.insertArticle(data);
         return result;
-    }
-}
-export default new article
+    };
+};
+export default new service();

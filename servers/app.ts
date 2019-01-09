@@ -1,59 +1,60 @@
 /**
  * FileName    : app.ts
- * ProjectName : servers
+ * ProjectName : item5
  * Author      : terrorblade
- * Created Date: 2018-12-10 20:16:23
+ * Created Date: 2019-01-08 14:39:23
  * Description : 
  * -----
- * Last Modified: 2019-01-03 16:53:31
+ * Last Modified: 2019-01-09 09:46:36
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
  */
-
 import * as koa from 'koa';
 import * as path from 'path';
-import * as koaStatic from 'koa-static';
 import * as jsonBody from 'koa-json';
+import * as koaRouter from 'koa-router';
 import * as kosLogger from 'koa-logger';
+import * as koaStatic from 'koa-static';
 import * as bodyparser from 'koa-bodyparser';
-import * as onerror from 'koa-onerror';
-import logger from './server/lib/logger';
-import router from './server/router/router';
-import historyApiFallback from './middleware/koa2-connect-history-api-fallback';
+import logger from './lib/logger';
+import commonRouter from './server/router/common';
+import blogRouter from './server/router/blog';
+import wechatRouter from './server/router/wechat';
+import historyApiFallback from './middleware/historyFillback';
 
+class app {
+    public koa:koa.Application;
+    constructor(){
+        this.koa = new koa();
+        this.middleware();
+        this.router();
+        this.onerror();
+    };
+    private middleware():void{
+        this.koa.use(historyApiFallback());//vue打包的history模式
+        this.koa.use(koaStatic(path.join(__dirname,'./public')));//静态容器
+        this.koa.use(kosLogger());//日志
+        this.koa.use(jsonBody());//json解析
+        this.koa.use(bodyparser({
+            enableTypes:['json', 'form', 'text'],
+            onerror(err:any, ctx:any) {
+                logger.logRes(ctx,JSON.stringify(err));
+                ctx.throw('body parse error', 422);
+            }
+        }));
+    };
+    private router():void{
+        this.koa.use(commonRouter.routes()).use(commonRouter.allowedMethods());//公共路由
+        this.koa.use(blogRouter.routes()).use(blogRouter.allowedMethods());//博客路由
+        this.koa.use(wechatRouter.routes()).use(wechatRouter.allowedMethods());//wechat路由
+    };
+    private onerror():void{//报错
+        process.on('uncaughtException', (err:any):void=>{
+            console.error(JSON.stringify(err.stack));
+            logger.logError(JSON.stringify(err.stack),'uncaughtException');
+        });
+    };
+}
 
-const app:any = new koa();
-
-app.use(historyApiFallback());
-onerror(app);
-// 配置静态web服务的中间件
-app.use(koaStatic(path.join(__dirname,'./public')));
-// middlewares
-app.use(bodyparser({
-    enableTypes:['json', 'form', 'text'],
-    onerror(err:any, ctx:any) {
-        logger.logRes(ctx,JSON.stringify(err));
-        ctx.throw('body parse error', 422);
-    }
-}));
-//解析Json数据
-app.use(jsonBody());
-//日志输出
-app.use(kosLogger());
-//路由
-app.use(router.routes()).use(router.allowedMethods());
-
-
-// 报错提示
-app.on('error', (err:any, ctx:any) => {
-    logger.logRes(ctx,JSON.stringify(err));
-});
-
-process.on('uncaughtException', (err:any)=>{
-    console.error(JSON.stringify(err.stack));
-    logger.logError(JSON.stringify(err.stack),'uncaughtException');
-});
-
-export default app
-
+export default new app().koa

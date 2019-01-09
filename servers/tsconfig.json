@@ -19,7 +19,7 @@
       "types": [
         "node"
       ],
-      "outDir": "./dist"
+      "outDir": "../dist"
     },
     "exclude": [
       "node_modules"

@@ -25,4 +25,16 @@ export default {
   width 100%
   height 100%
   font-family:'Pacifico', cursive;
+.login-btn
+  display block
+  background-color #039be5
+  box-shadow: 0 0 0 0 rgba(0,0,0,.2), 0 0 0 0 rgba(0,0,0,.14), 0 0 0 0 rgba(0,0,0,.12);
+  cursor pointer 
+  box-sizing border-box
+  text-align center
+  border-radius 4px 
+  overflow visible
+  line-height 35px
+.col-red
+  color red
 </style>
