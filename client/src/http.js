@@ -4,7 +4,7 @@
  * Author      : terrorblade
  * Created Date: 2019-01-02 17:06:57
  * Description :  -----
- * Last Modified: 2019-01-03 11:37:46
+ * Last Modified: 2019-01-09 17:23:56
  * Modified By  : -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
  */
@@ -50,7 +50,7 @@ class Http {
       })
         .then(response => {
           if (!response.data.code) {
-            resolve(response.data.datas)
+            resolve(response.data)
           } else {
             reject(response.data)
           }
@@ -75,7 +75,7 @@ class Http {
       axios.post(url, data)
         .then(response => {
           if (!response.data.code) {
-            resolve(response.data.datas)
+            resolve(response.data)
           } else {
             reject(response.data)
           }
@@ -100,7 +100,7 @@ class Http {
       axios.put(url, data)
         .then(response => {
           if (!response.data.code) {
-            resolve(response.data.datas)
+            resolve(response.data)
           } else {
             reject(response.data)
           }

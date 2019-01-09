@@ -5,7 +5,7 @@
  * Created Date: 2019-01-08 14:39:23
  * Description : 
  * -----
- * Last Modified: 2019-01-09 09:46:36
+ * Last Modified: 2019-01-09 14:18:48
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
@@ -17,6 +17,7 @@ import * as koaRouter from 'koa-router';
 import * as kosLogger from 'koa-logger';
 import * as koaStatic from 'koa-static';
 import * as bodyparser from 'koa-bodyparser';
+import * as session from 'koa-session';
 import logger from './lib/logger';
 import commonRouter from './server/router/common';
 import blogRouter from './server/router/blog';
@@ -31,7 +32,7 @@ class app {
         this.router();
         this.onerror();
     };
-    private middleware():void{
+    private middleware():void{//中间件
         this.koa.use(historyApiFallback());//vue打包的history模式
         this.koa.use(koaStatic(path.join(__dirname,'./public')));//静态容器
         this.koa.use(kosLogger());//日志
@@ -43,8 +44,19 @@ class app {
                 ctx.throw('body parse error', 422);
             }
         }));
+        this.koa.key=['my Name is terrorblade'];
+        const CONFIG = {
+            'key': 'koa:terrorblade',
+            'maxAge': 86400000,
+            'autoCommit': true, 
+            'overwrite': true, 
+            'signed': true, 
+            'rolling': false, 
+            'renew': false
+        };
+        this.koa.use(session(CONFIG, this.koa))
     };
-    private router():void{
+    private router():void{//路由
         this.koa.use(commonRouter.routes()).use(commonRouter.allowedMethods());//公共路由
         this.koa.use(blogRouter.routes()).use(blogRouter.allowedMethods());//博客路由
         this.koa.use(wechatRouter.routes()).use(wechatRouter.allowedMethods());//wechat路由

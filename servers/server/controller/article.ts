@@ -5,14 +5,14 @@
  * Created Date: 2019-01-09 10:30:36
  * Description : 
  * -----
- * Last Modified: 2019-01-09 11:46:30
+ * Last Modified: 2019-01-09 16:07:18
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
  */
 
 import { Context } from 'vm';
-import service from '../service/article';
+import serviceArticle from '../service/article';
 import person from '../../lib/common';
 import status from './status';
 class article{
@@ -21,16 +21,15 @@ class article{
     };
     async addBlogArticle(ctx:Context):Promise<void>{
         const {userName,type,title,content} = ctx.request.body;
-        const paramFlag = person.checkArgumentsSting(userName,type,title,content);
-        if(!paramFlag){
+        if(!person.checkArgumentsSting(userName,type,title,content)){
             ctx.body = status.param401();
             return;
         }
         try{
-            await service.addArticle(ctx.request.body);
+            await serviceArticle.addArticle(ctx.request.body);
             ctx.body=status.success();
         }catch(e){
-            ctx.body=status.mysqlErr();
+            ctx.body=status.mysqlErr(JSON.stringify(e));
         } 
     };
 };
