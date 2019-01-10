@@ -4,7 +4,7 @@
  * Author      : terrorblade
  * Created Date: 2019-01-09 16:42:14
  * Description : ----- terrblase
- * Last Modified: 2019-01-09 17:04:34
+ * Last Modified: 2019-01-10 10:08:05
 -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
  */
@@ -20,6 +20,13 @@ class Base {
       return true
     }
     return false
+  }
+  findArrAttrData (arr, attr, value) {
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i][attr] === value) {
+        return arr[i]
+      }
+    }
   }
 }
 export default new Base()

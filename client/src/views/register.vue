@@ -5,7 +5,7 @@
  * Created Date: 2018-12-26 16:27:57
  * Description :
  * -----
- * Last Modified: 2019-01-09 17:24:29
+ * Last Modified: 2019-01-10 16:17:58
  * Modified By  :
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
@@ -22,7 +22,7 @@
           <div class="ipt-from-item" v-for="(list,index) in nameList">
             <div class="ipt-text">
               <div class="ipt-label">
-                <label :for="index"  :class="{'inpt-focus-animate':list.flag || list.value.length}">
+                <label :for="index" :class="{'inpt-focus-animate':list.flag || list.value.length}">
                   {{list.name}}
                   <span class="col-red">&nbsp;*</span>
                 </label>
@@ -33,6 +33,7 @@
                 v-model="list.value"
                 v-on:focus="list.flag=true"
                 v-on:blur="list.flag=false"
+                autocomplete="off"
               >
             </div>
           </div>
@@ -50,8 +51,8 @@
 </template>
 <script>
 import Footer from "../components/common/footer.vue";
-import base from '../../libs/base';
-import md5 from 'md5';
+import base from "../../libs/base";
+import md5 from "md5";
 export default {
   components: {
     footers: Footer
@@ -84,38 +85,44 @@ export default {
   },
   methods: {
     submit() {
+      this.$store.commit('SET_TOAST_DATA',{
+        type: "msg-error",
+        showTime: 6000,
+        msg: "我是天才而已不要忘记我"
+      });
+      return;
       const self = this;
       const reqData = {
-        'userName':self.nameList[0].value,
-        'email':self.nameList[1].value,
-        'password':md5(self.nameList[2].value)
-      }
-      for(let i=0;i<self.nameList.length;i++){
-        if(self.nameList[i].value.length<6){
-          console.log(`0---------${self.nameList[i].name}不能为空`)
+        userName: self.nameList[0].value,
+        email: self.nameList[1].value,
+        password: md5(self.nameList[2].value)
+      };
+      for (let i = 0; i < self.nameList.length; i++) {
+        if (self.nameList[i].value.length < 6) {
+          console.log(`0---------${self.nameList[i].name}不能为空`);
           return;
         }
       }
-      if(!base.isNumberOrLetter(self.nameList[0].value)){
+      if (!base.isNumberOrLetter(self.nameList[0].value)) {
         console.log("1--------账号合法");
         return;
       }
-      if(!base.isEmail(self.nameList[1].value)){
+      if (!base.isEmail(self.nameList[1].value)) {
         console.log("2--------邮箱不合法");
         return;
       }
-      if(self.nameList[2].value!==self.nameList[3].value){
+      if (self.nameList[2].value !== self.nameList[3].value) {
         console.log("3--------密码不一致");
         return;
       }
-      if(!base.isNumberOrLetter(self.nameList[2].value)){
-         console.log("4--------密码不合法");
-         return;
+      if (!base.isNumberOrLetter(self.nameList[2].value)) {
+        console.log("4--------密码不合法");
+        return;
       }
       self.axios
-        .post(self.apiJson.addUser,reqData)
+        .post(self.apiJson.addUser, reqData)
         .then(result => {
-          console.log('成功----',result);
+          console.log("成功----", result);
         })
         .catch(err => {
           console.log(err);
@@ -126,8 +133,8 @@ export default {
 </script>
 <style lang="stylus" scoped>
 .inpt-focus-animate {
-  color:#039be5!important;
-  transform :translate(-2.8em,-1.2em) scale(.75) perspective(100px) translateZ(.0016px);
+  color: #039be5 !important;
+  transform: translate(-2.8em, -1.2em) scale(0.75) perspective(100px) translateZ(0.0016px);
 }
 
 .content {
@@ -220,5 +227,4 @@ export default {
 .pb-20 {
   padding-bottom: 20px;
 }
-
 </style>
