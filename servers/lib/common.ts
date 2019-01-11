@@ -5,7 +5,7 @@
  * Created Date: 2019-01-08 17:22:20
  * Description : 
  * -----
- * Last Modified: 2019-01-09 17:18:03
+ * Last Modified: 2019-01-11 15:50:57
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
@@ -13,6 +13,10 @@
 import * as fs from 'fs';
 import * as moment from 'moment';
 import * as fsex from 'fs-extra';
+import * as jwt from 'jsonwebtoken';
+import {LOGIN_USER} from '../server/interface/user';
+const config = require(`../config/config.${global['env']}`).default; 
+
 class Person {
     constructor() {
 
@@ -62,6 +66,23 @@ class Person {
         const myReg = /^[-_A-Za-z0-9]+@([_A-Za-z0-9]+.)+[A-Za-z0-9]{2,3}$/;
         if (myReg.test(str)) return true;
         return false;
+    };
+    getToken(data:LOGIN_USER):Promise<string>{
+        return new Promise((resolve,reject)=>{
+            const created = Math.floor(Date.now() / 1000);
+            console.log("1--------",config.cert)
+            jwt.sign({ 
+                user: JSON.stringify(data),
+                iat: created +3600*24 }, config.cert, { algorithm: 'HS256' }, (err, token)=> {
+                if(err){
+                    reject('')
+                }else{
+                    resolve(token)
+                }
+           
+            });
+           
+        });
     };
 }
 export default new Person();

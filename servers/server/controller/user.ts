@@ -5,7 +5,7 @@
  * Created Date: 2019-01-09 09:11:01
  * Description : 
  * -----
- * Last Modified: 2019-01-09 17:20:15
+ * Last Modified: 2019-01-11 16:05:53
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
@@ -14,16 +14,18 @@ import { Context } from 'vm';
 import person from '../../lib/common';
 import serviceUser from '../service/user';
 import status from './status';
-class user{
+import { stat } from 'fs';
+class User{
     constructor(){
 
     };
     async addBlogUser(ctx:Context):Promise<any>{
         const {userName,email,password} = ctx.request.body;
-        if(!person.checkArgumentsSting(userName,email,password)){
+        if(!person.checkArgumentsSting(userName,email,password)){//检查类型
             ctx.body = status.param401();
             return;
         }
+        //判断规则
         if(typeof ctx.request.body.authority ==='undefined'){
             ctx.request.body.authority = 0;
         }
@@ -44,14 +46,44 @@ class user{
             return;
         }
         try{
-            await serviceUser.addUser(ctx.request.body);
-            ctx.body=status.success();
+            const slName = await serviceUser.findSingleUser( userName );//查询是否存在
+            if(slName && !slName.length){//不存在注册
+                await serviceUser.addUser(ctx.request.body);
+                ctx.body=status.success();
+            }else{
+                ctx.body=status.param500();
+            }
         }catch(e){
             ctx.body=status.mysqlErr(JSON.stringify(e));
         } 
+    };
+    async blogLogin(ctx:Context):Promise<any>{
+        const {userName,password} = ctx.request.body;
+        if(!person.checkArgumentsSting(userName,password)){
+            ctx.body = status.param400();
+            return;
+        }
+        const userData = await serviceUser.findSingleUser(userName);
+        if(userData && !userData.length){
+            ctx.body = status.param504();
+            return;
+        }
+        if(password !== userData[0].password){
+            ctx.body = status.param505();
+            return;
+        }
+        const token =await person.getToken(ctx.request.body).catch(()=>false);//获取token
+        if(!token){//获取失败报错
+            ctx.body = status.unusual();
+        }else{
+            const code = JSON.parse(JSON.stringify(status.success()));
+            code.token = token;
+            ctx.append('token',token);
+            ctx.body = code;
+        }
     };
     addWechatUser(ctx:Context):void{
         ctx.body='wechat'
     };
 };
-export default new user();
+export default new User();

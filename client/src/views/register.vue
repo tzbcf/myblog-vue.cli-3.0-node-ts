@@ -5,7 +5,7 @@
  * Created Date: 2018-12-26 16:27:57
  * Description :
  * -----
- * Last Modified: 2019-01-10 16:17:58
+ * Last Modified: 2019-01-11 13:45:03
  * Modified By  :
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
@@ -42,7 +42,7 @@
           <a class="login-btn" @click="submit">注册</a>
         </div>
         <div class="mb-80">已有账户
-          <router-link to>登录</router-link>
+          <router-link to="/login">登录</router-link>
         </div>
         <footers class="footer"></footers>
       </div>
@@ -51,7 +51,6 @@
 </template>
 <script>
 import Footer from "../components/common/footer.vue";
-import base from "../../libs/base";
 import md5 from "md5";
 export default {
   components: {
@@ -85,47 +84,68 @@ export default {
   },
   methods: {
     submit() {
-      this.$store.commit('SET_TOAST_DATA',{
-        type: "msg-error",
-        showTime: 6000,
-        msg: "我是天才而已不要忘记我"
-      });
-      return;
       const self = this;
+      for (let i = 0; i < self.nameList.length; i++) {
+        if (self.nameList[i].value.length < 6) {
+          self.$store.commit("SET_TOAST_DATA", {
+            type: "msg-error",
+            msg: `${self.nameList[i].name}长度不够`
+          });
+          return;
+        }
+      }
+      if (!self.base.isNumberOrLetter(self.nameList[0].value)) {
+        self.$store.commit("SET_TOAST_DATA", {
+          type: "msg-error",
+          msg: `账号不符合规则`
+        });
+        return;
+      }
+      if (!self.base.isEmail(self.nameList[1].value)) {
+        self.$store.commit("SET_TOAST_DATA", {
+          type: "msg-error",
+          msg: `邮箱不合法`
+        });
+        return;
+      }
+      if (!self.base.isNumberOrLetter(self.nameList[2].value)) {
+        self.$store.commit("SET_TOAST_DATA", {
+          type: "msg-error",
+          msg: `密码不符合规则`
+        });
+        return;
+      }
+      if (self.nameList[2].value !== self.nameList[3].value) {
+        self.$store.commit("SET_TOAST_DATA", {
+          type: "msg-error",
+          msg: `两次输入密码不一致`
+        });
+        return;
+      }
+      self.$store.commit("SET_TOAST_DATA", {
+        type: "loading",
+        showTime: 999999
+      });
       const reqData = {
         userName: self.nameList[0].value,
         email: self.nameList[1].value,
         password: md5(self.nameList[2].value)
       };
-      for (let i = 0; i < self.nameList.length; i++) {
-        if (self.nameList[i].value.length < 6) {
-          console.log(`0---------${self.nameList[i].name}不能为空`);
-          return;
-        }
-      }
-      if (!base.isNumberOrLetter(self.nameList[0].value)) {
-        console.log("1--------账号合法");
-        return;
-      }
-      if (!base.isEmail(self.nameList[1].value)) {
-        console.log("2--------邮箱不合法");
-        return;
-      }
-      if (self.nameList[2].value !== self.nameList[3].value) {
-        console.log("3--------密码不一致");
-        return;
-      }
-      if (!base.isNumberOrLetter(self.nameList[2].value)) {
-        console.log("4--------密码不合法");
-        return;
-      }
       self.axios
         .post(self.apiJson.addUser, reqData)
         .then(result => {
-          console.log("成功----", result);
+          self.$store.commit("SET_TOAST_DATA", {
+            type: "done",
+            msg: `${result.msg}`,
+            showTime:1500
+          });
+          self.$router.push({path:'/login'});
         })
         .catch(err => {
-          console.log(err);
+          self.$store.commit("SET_TOAST_DATA", {
+            type: "msg-error",
+            msg: `${err.msg}`
+          });
         });
     }
   }
@@ -141,7 +161,6 @@ export default {
   width: 100%;
   height: 100%;
   background-image: url('../../public/img/hd.jpg');
-
   .container {
     display: flex;
     align-items: center;
@@ -214,17 +233,5 @@ export default {
       }
     }
   }
-}
-
-.mb-20 {
-  margin-bottom: 20px;
-}
-
-.mb-80 {
-  margin-bottom: 80px;
-}
-
-.pb-20 {
-  padding-bottom: 20px;
 }
 </style>

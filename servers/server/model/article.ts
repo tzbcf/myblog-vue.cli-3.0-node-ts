@@ -5,7 +5,7 @@
  * Created Date: 2019-01-09 10:39:24
  * Description : 
  * -----
- * Last Modified: 2019-01-09 16:02:44
+ * Last Modified: 2019-01-11 10:25:19
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
@@ -14,7 +14,7 @@
 import {db} from './db';
 import person from '../../lib/common';
 import {ACTICLE_DETAILS} from '../interface/article';
-class modelArticle {
+class ModelArticle {
     constructor(){
 
     };
@@ -24,4 +24,4 @@ class modelArticle {
         return await db(isnertSql);
     }
 };
-export default new modelArticle();
+export default new ModelArticle();

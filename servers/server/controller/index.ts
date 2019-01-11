@@ -5,13 +5,13 @@
  * Created Date: 2019-01-09 09:11:15
  * Description : 
  * -----
- * Last Modified: 2019-01-09 09:26:56
+ * Last Modified: 2019-01-11 10:25:42
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
  */
 import { Context } from "vm";
-class common{
+class Common{
     constructor(){
       
     };
@@ -19,4 +19,4 @@ class common{
         ctx.body='222312414'
     };
 };
-export default new common();
+export default new Common();

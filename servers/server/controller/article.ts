@@ -5,7 +5,7 @@
  * Created Date: 2019-01-09 10:30:36
  * Description : 
  * -----
- * Last Modified: 2019-01-09 16:07:18
+ * Last Modified: 2019-01-11 10:25:49
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
@@ -15,7 +15,7 @@ import { Context } from 'vm';
 import serviceArticle from '../service/article';
 import person from '../../lib/common';
 import status from './status';
-class article{
+class Article{
     constructor(){
 
     };
@@ -33,4 +33,4 @@ class article{
         } 
     };
 };
-export default new article();
+export default new Article();

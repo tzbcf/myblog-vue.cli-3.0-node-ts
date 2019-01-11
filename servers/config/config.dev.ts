@@ -5,7 +5,7 @@
  * Created Date: 2019-01-08 16:55:59
  * Description : 
  * -----
- * Last Modified: 2019-01-09 09:54:49
+ * Last Modified: 2019-01-11 15:02:59
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
@@ -24,5 +24,6 @@ export default {
         "user"     : "root",
         "password" : "root",
         "database" : "blog"
-    }
+    },
+    "cert":"my name is Terrorblade"
 }

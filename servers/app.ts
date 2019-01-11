@@ -5,7 +5,7 @@
  * Created Date: 2019-01-08 14:39:23
  * Description : 
  * -----
- * Last Modified: 2019-01-09 14:18:48
+ * Last Modified: 2019-01-11 15:26:31
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
@@ -13,7 +13,6 @@
 import * as koa from 'koa';
 import * as path from 'path';
 import * as jsonBody from 'koa-json';
-import * as koaRouter from 'koa-router';
 import * as kosLogger from 'koa-logger';
 import * as koaStatic from 'koa-static';
 import * as bodyparser from 'koa-bodyparser';
@@ -24,7 +23,7 @@ import blogRouter from './server/router/blog';
 import wechatRouter from './server/router/wechat';
 import historyApiFallback from './middleware/historyFillback';
 
-class app {
+class App {
     public koa:koa.Application;
     constructor(){
         this.koa = new koa();
@@ -69,4 +68,4 @@ class app {
     };
 }
 
-export default new app().koa
+export default new App().koa

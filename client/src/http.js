@@ -4,7 +4,7 @@
  * Author      : terrorblade
  * Created Date: 2019-01-02 17:06:57
  * Description :  -----
- * Last Modified: 2019-01-09 17:23:56
+ * Last Modified: 2019-01-11 16:19:53
  * Modified By  : -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
  */
@@ -17,7 +17,7 @@ axios.defaults.baseURL = config.baseURL
 axios.interceptors.request.use(
   config => {
     if (store.state.token) {
-      config.headers.Authorization = `token ${store.state.token}`
+      config.headers.token = `token ${store.state.token}`
     }
     return config
   },

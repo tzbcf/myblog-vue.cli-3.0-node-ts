@@ -32,6 +32,7 @@ export default {
 .login-btn
   display block
   background-color #039be5
+  color #fff
   box-shadow: 0 0 0 0 rgba(0,0,0,.2), 0 0 0 0 rgba(0,0,0,.14), 0 0 0 0 rgba(0,0,0,.12);
   cursor pointer 
   box-sizing border-box
@@ -41,4 +42,15 @@ export default {
   line-height 35px
 .col-red
   color red
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.mb-80 {
+  margin-bottom: 80px;
+}
+
+.pb-20 {
+  padding-bottom: 20px;
+}  
 </style>
