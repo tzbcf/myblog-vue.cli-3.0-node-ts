@@ -5,7 +5,7 @@
  * Created Date: 2019-01-08 17:22:20
  * Description : 
  * -----
- * Last Modified: 2019-01-11 15:50:57
+ * Last Modified: 2019-01-14 17:50:43
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
@@ -70,7 +70,6 @@ class Person {
     getToken(data:LOGIN_USER):Promise<string>{
         return new Promise((resolve,reject)=>{
             const created = Math.floor(Date.now() / 1000);
-            console.log("1--------",config.cert)
             jwt.sign({ 
                 user: JSON.stringify(data),
                 iat: created +3600*24 }, config.cert, { algorithm: 'HS256' }, (err, token)=> {
@@ -81,7 +80,6 @@ class Person {
                 }
            
             });
-           
         });
     };
 }

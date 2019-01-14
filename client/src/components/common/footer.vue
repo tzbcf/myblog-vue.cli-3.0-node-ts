@@ -5,7 +5,7 @@
  * Created Date: 2018-12-26 14:45:30
  * Description :
  * -----
- * Last Modified: 2019-01-04 17:10:51
+ * Last Modified: 2019-01-14 17:59:39
  * Modified By  :
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
@@ -35,6 +35,6 @@
             margin 0 0 14px;
             font-size: 14px;
             font-weight: 500;
-            color: #fff;
+            color: #B9B9B9;
             letter-spacing: 1px;
 </style>
