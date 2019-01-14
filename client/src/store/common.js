@@ -1,6 +1,3 @@
-import { resolve } from "url";
-import { reject } from "q";
-
 /*
  * FileName    : common
  * ProjectName : client
@@ -22,7 +19,7 @@ const state = {
 const actions = {
   login ({ commit, state }, data) {
     return new Promise((resolve, reject) => {
-        this.axios.
+      this.axios.post()
     })
   }
 }
