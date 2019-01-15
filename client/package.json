@@ -11,6 +11,7 @@
     "@tinymce/tinymce-vue": "^1.1.0",
     "axios": "^0.18.0",
     "md5": "^2.2.1",
+    "qq-wechat-emotion-parser": "^1.0.4",
     "tinymce": "^4.9.2",
     "vue": "^2.5.17",
     "vue-router": "^3.0.1",

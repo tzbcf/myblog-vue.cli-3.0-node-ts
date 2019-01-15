@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Inexistence from './views/404.vue'
+import Index from './components/index.vue'
+import About from './components/about.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -15,8 +17,19 @@ export default new Router({
     },
     {
       path: '/',
-      name: 'home',
-      component: Home
+      component: Home,
+      children: [
+        {
+          path: '/index',
+          name: 'Index',
+          component: Index
+        },
+        {
+          path: '/',
+          name: 'About',
+          component: About
+        }
+      ]
     },
     {
       path: '/register',

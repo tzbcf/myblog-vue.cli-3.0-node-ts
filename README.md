@@ -18,7 +18,7 @@
 
 ---
 ### client----前端vue@cli3.0    
->   博客前端页面 --- [博客前端魔板页面](http://www.2zzt.com/dome.php?id=9181 ) [点击跳转](http://www.2zzt.com/dome.php?id=9181 )
+>   博客前端页面 --- [博客前端魔板页面](https://dfjcx.cn/ ) [点击跳转](https://dfjcx.cn/)
 ---
 ### servers---node后端页面ts
 
@@ -42,6 +42,13 @@
 
     *  下一阶段---loading和Toast弹窗开发以及登录(目前toast组件还不能通用。重复点击会有Bug,还需要维护修改。)
             
+####  技术交流职业互推加微信好友
+
+
+![微信](https://www.terrorblade.xyz/img/wxfd.png)
+
+---
+***
 
 ```
 |-- project

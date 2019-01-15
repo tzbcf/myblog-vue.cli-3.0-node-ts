@@ -1,26 +1,30 @@
 /*
- * FileName    : home.vue
+ * FileName    : aticle.vue
  * ProjectName : client
  * Author      : terrorblade
- * Created Date: 2019-01-14 18:02:03
+ * Created Date: 2019-01-15 11:46:16
  * Description : 
  * -----
- * Last Modified: 2019-01-14 18:03:54
+ * Last Modified: 2019-01-15 11:47:37
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
  */
 
 <template>
-    <div class="ct-nav">
-
-    </div>
+    <article>
+        <div class="article">
+            <span>
+                sadsadadasd
+            </span>
+        </div>    
+    </article>    
 </template>
 
 <script>
 export default {
     data(){
-        return{
+        return {
 
         }
     }

@@ -5,14 +5,14 @@
  * Created Date: 2018-12-26 14:45:30
  * Description :
  * -----
- * Last Modified: 2019-01-14 17:59:39
+ * Last Modified: 2019-01-15 16:52:44
  * Modified By  :
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
  */
 <template>
     <div class="content-footer">
-        <div class="footer">
+        <div class="ct-footer">
             <h6>WEBSITE BY Terrorblade</h6>
             <p>© 2018. All RIGHT RESERVED.</p>
             <p>
@@ -29,8 +29,8 @@
 </template>
 <style lang="stylus" scoped>
 .content-footer
-    overflow hidden
-    .footer
+    padding-top 60px
+    .ct-footer
         h6,p,a
             margin 0 0 14px;
             font-size: 14px;

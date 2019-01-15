@@ -5,7 +5,7 @@
  * Created Date: 2018-12-26 16:26:37
  * Description :
  * -----
- * Last Modified: 2019-01-14 17:50:59
+ * Last Modified: 2019-01-15 11:36:38
  * Modified By  :
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
@@ -62,103 +62,103 @@
   </div>
 </template>
 <script>
-import footers from '../components/common/footer.vue'
-import md5 from 'md5'
+import footers from "../components/common/footer.vue";
+import md5 from "md5";
 export default {
   components: {
     footers
   },
-  data () {
+  data() {
     return {
       nameList: [
         {
-          name: 'Name',
+          name: "Name",
           flag: false,
-          value: ''
+          value: ""
         },
         {
-          name: 'Password',
+          name: "Password",
           flag: false,
-          value: ''
+          value: ""
         }
       ],
       rememberFlag: false
-    }
+    };
   },
   methods: {
-    submit () {
-      const self = this
+    submit() {
+      const self = this;
       if (!self.nameList[0].value || self.nameList[0].value.length < 6) {
-        self.$store.commit('SET_TOAST_DATA', {
-          type: 'msg-error',
+        self.$store.commit("SET_TOAST_DATA", {
+          type: "msg-error",
           msg: `userName不能为空且长度大于6位`
-        })
-        return
+        });
+        return;
       }
       if (!self.nameList[1].value || self.nameList[1].value.length < 6) {
-        self.$store.commit('SET_TOAST_DATA', {
-          type: 'msg-error',
+        self.$store.commit("SET_TOAST_DATA", {
+          type: "msg-error",
           msg: `password不能为空且长度大于6位`
-        })
-        return
+        });
+        return;
       }
-      self.$store.commit('SET_TOAST_DATA', {
-        type: 'loading',
+      self.$store.commit("SET_TOAST_DATA", {
+        type: "loading",
         showTime: 999999
-      })
+      });
       if (self.nameList[1].value.length <= 18) {
-        self.nameList[1].value = md5(self.nameList[1].value)
+        self.nameList[1].value = md5(self.nameList[1].value);
       }
       const userData = {
         userName: self.nameList[0].value,
         password: self.nameList[1].value
-      }
-      const loginUrl = self.apiJson.login
+      };
+      const loginUrl = self.apiJson.login;
       self.$store
-        .dispatch('login', { loginUrl, userData })
+        .dispatch("login", { loginUrl, userData })
         .then(result => {
           if (self.rememberFlag) {
-            window.localStorage.setItem('userData', JSON.stringify(userData))
-            window.localStorage.setItem('rememberFlag', self.rememberFlag)
+            window.localStorage.setItem("userData", JSON.stringify(userData));
+            window.localStorage.setItem("rememberFlag", self.rememberFlag);
           }
-          window.localStorage.setItem('token', result.token)
-          self.$store.commit('SET_TOAST_DATA', {
-            type: 'done',
+          window.localStorage.setItem("token", result.token);
+          self.$store.commit("SET_TOAST_DATA", {
+            type: "done",
             msg: `${result.msg}`,
             showTime: 1500
-          })
-          self.$router.push({ path: '/home' })
+          });
+          self.$router.push({ path: "/home" });
         })
         .catch(err => {
-          self.$store.commit('SET_TOAST_DATA', {
-            type: 'msg-error',
+          self.$store.commit("SET_TOAST_DATA", {
+            type: "msg-error",
             msg: `${err.msg}`
-          })
-        })
+          });
+        });
     },
-    getStorage () {
-      let userData = ''
+    getStorage() {
+      let userData = "";
 
-      let rememberFlag = ''
+      let rememberFlag = "";
       try {
-        userData = JSON.parse(window.localStorage.getItem('userData'))
-        rememberFlag = window.localStorage.getItem('rememberFlag')
+        userData = JSON.parse(window.localStorage.getItem("userData"));
+        rememberFlag = window.localStorage.getItem("rememberFlag");
       } catch (e) {
-        userData = ''
+        userData = "";
       }
       if (userData) {
-        this.nameList[0].value = userData.userName
-        this.nameList[1].value = userData.password
+        this.nameList[0].value = userData.userName;
+        this.nameList[1].value = userData.password;
       }
       if (rememberFlag) {
-        this.rememberFlag = rememberFlag
+        this.rememberFlag = rememberFlag;
       }
     }
   },
-  mounted () {
-    this.getStorage()
+  mounted() {
+    this.getStorage();
   }
-}
+};
 </script>
 <style lang="stylus" scoped>
 .inpt-focus-animate {
@@ -169,7 +169,6 @@ export default {
 .content {
   width: 100%;
   height: 100%;
-  position: relative;
   background-image: url('../../public/img/hd.jpg');
 }
 
