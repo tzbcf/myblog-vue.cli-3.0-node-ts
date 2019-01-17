@@ -5,7 +5,7 @@
  * Created Date: 2018-12-26 16:27:57
  * Description :
  * -----
- * Last Modified: 2019-01-11 13:45:03
+ * Last Modified: 2019-01-17 09:47:08
  * Modified By  :
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
@@ -50,7 +50,7 @@
   </div>
 </template>
 <script>
-import Footer from "../components/common/footer.vue";
+import Footer from "@/components/common/footer.vue";
 import md5 from "md5";
 export default {
   components: {
@@ -137,9 +137,9 @@ export default {
           self.$store.commit("SET_TOAST_DATA", {
             type: "done",
             msg: `${result.msg}`,
-            showTime:1500
+            showTime: 1500
           });
-          self.$router.push({path:'/login'});
+          self.$router.push({ path: "/login" });
         })
         .catch(err => {
           self.$store.commit("SET_TOAST_DATA", {
@@ -160,7 +160,8 @@ export default {
 .content {
   width: 100%;
   height: 100%;
-  background-image: url('../../public/img/hd.jpg');
+  background-image: url('../../../public/img/hd.jpg');
+
   .container {
     display: flex;
     align-items: center;

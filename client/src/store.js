@@ -11,11 +11,6 @@ export default new Vuex.Store({
     common
   },
   plugins: [createPersistedState({//  数据持久化，刷新不消失
-    storage: window.sessionStorage,
-    reducer (val) {
-      return {
-        assessmentData: val.common
-      }
-    }
+    storage: window.sessionStorage
   })]
 })

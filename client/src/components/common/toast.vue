@@ -5,7 +5,7 @@
  * Created Date: 2019-01-10 09:23:12
  * Description : 
  * -----
- * Last Modified: 2019-01-11 10:17:38
+ * Last Modified: 2019-01-17 09:47:49
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
@@ -78,8 +78,7 @@ export default {
     }
   },
   methods: {},
-  mounted() {
-  }
+  mounted() {}
 };
 </script>
 
@@ -165,6 +164,3 @@ export default {
   }
 }
 </style>
-
-
-

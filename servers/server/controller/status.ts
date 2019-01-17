@@ -5,7 +5,7 @@
  * Created Date: 2019-01-09 10:58:30
  * Description : 
  * -----
- * Last Modified: 2019-01-11 15:59:53
+ * Last Modified: 2019-01-17 17:39:24
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
@@ -50,6 +50,11 @@ class Status{
         this.msg = '参数错误出现不是字符串的参数';
         return {'code':this.code,'msg':this.msg}
     };
+    param410():API_STATUS{
+        this.code = -410,
+        this.msg = '缺少上传文件';
+        return {'code':this.code,'msg':this.msg}
+    };
     param500():API_STATUS{
         this.code = -500,
         this.msg = 'userName已经存在';
@@ -78,6 +83,16 @@ class Status{
     param505():API_STATUS{
         this.code = -505,
         this.msg = '密码不对';
+        return {'code':this.code,'msg':this.msg}
+    };
+    param506():API_STATUS{
+        this.code = -506,
+        this.msg = 'token失效';
+        return {'code':this.code,'msg':this.msg}
+    };
+    param507():API_STATUS{
+        this.code = -507,
+        this.msg = 'token不合法';
         return {'code':this.code,'msg':this.msg}
     };
 }

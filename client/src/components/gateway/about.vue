@@ -3,10 +3,10 @@
  * ProjectName : client
  * Author      : terrorblade
  * Created Date: 2019-01-15 10:55:16
- * Description : 
+ * Description : terrorblade ;
  * -----
- * Last Modified: 2019-01-15 16:11:59
- * Modified By  : 
+ * Last Modified: 2019-01-17 09:51:53
+ * Modified By  : terrorblade ;
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
  */
@@ -43,7 +43,13 @@
         <li>
           <p>
             <i class="fa fa-github" style="color: rgb(0, 0, 0);"></i>
-            <span><a href="https://github.com/tzbcf" target="_blank" style="color: #565656;">https://github.com/tzbcf</a></span>
+            <span>
+              <a
+                href="https://github.com/tzbcf"
+                target="_blank"
+                style="color: #565656;"
+              >https://github.com/tzbcf</a>
+            </span>
           </p>
         </li>
         <li>
@@ -61,62 +67,72 @@
       </ul>
     </div>
     <div class="ab-play">
-        <h3>Play tour</h3>
-        <div class="tour-icon">
-            <div>
-                <img src="img/wxfd.png" alt="微信">
-            </div>
-            <div>
-                <img src="img/wxfd.png" alt="支付宝">
-            </div>
+      <h3>Play tour</h3>
+      <div class="tour-icon">
+        <div>
+          <img src="img/wxfd.png" alt="微信">
         </div>
+        <div>
+          <img src="img/wxfd.png" alt="支付宝">
+        </div>
+      </div>
     </div>
     <div class="ab-leave">
-        <h3>leave word</h3>
-        <div></div>
+      <h3>leave word</h3>
+      <div></div>
     </div>
   </div>
 </template>
 <script>
 export default {
-  data() {
-    return {
-
-    };
+  data () {
+    return {}
   }
-};
+}
 </script>
 
 <style lang="stylus" scoped>
-.ct-main 
+.ct-main {
   height: 1800px;
   background: #fff;
   box-sizing: border-box;
   color: #565656;
 
-  .ab-info,.ab-play
-    margin-bottom 30px
-    h3
-        font-weight bold
-        font-size 46px
-    ul 
-      li 
+  .ab-info, .ab-play {
+    margin-bottom: 30px;
+
+    h3 {
+      font-weight: bold;
+      font-size: 46px;
+    }
+
+    ul {
+      li {
         padding: 20px 0;
 
-        p 
-          i 
+        p {
+          i {
             margin-right: 5px;
-  .ab-play
-    h3
-        margin-bottom 10px
-    .tour-icon
-        display flex
-        justify-content center
-        align-items center
-        div
-            padding 0 10px
+          }
+        }
+      }
+    }
+  }
+
+  .ab-play {
+    h3 {
+      margin-bottom: 10px;
+    }
+
+    .tour-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      div {
+        padding: 0 10px;
+      }
+    }
+  }
+}
 </style>
-
-
-
-

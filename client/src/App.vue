@@ -54,4 +54,16 @@ export default {
 .pb-20 {
   padding-bottom: 20px;
 }
+
+.cl:after{
+  display:block;
+  clear:both;
+  content:"";
+  visibility:hidden;
+  height:0
+}
+
+.cl{
+  zoom 1
+}
 </style>

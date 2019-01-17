@@ -5,7 +5,7 @@
  * Created Date: 2018-12-26 16:26:37
  * Description :
  * -----
- * Last Modified: 2019-01-15 11:36:38
+ * Last Modified: 2019-01-17 17:54:55
  * Modified By  :
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
@@ -62,7 +62,7 @@
   </div>
 </template>
 <script>
-import footers from "../components/common/footer.vue";
+import footers from "@/components/common/footer.vue";
 import md5 from "md5";
 export default {
   components: {
@@ -127,7 +127,7 @@ export default {
             msg: `${result.msg}`,
             showTime: 1500
           });
-          self.$router.push({ path: "/home" });
+          // self.$router.push({ path: "/" });
         })
         .catch(err => {
           self.$store.commit("SET_TOAST_DATA", {
@@ -157,6 +157,16 @@ export default {
   },
   mounted() {
     this.getStorage();
+    const self = this;
+     self.axios
+        .post(self.apiJson.authorizedLogin).then((result)=>{
+        self.$store.commit("SET_TOAST_DATA", {
+            type: "done",
+            msg: `${result.msg}`,
+            showTime: 1500
+          });
+    }).catch(err=>{
+    })
   }
 };
 </script>
@@ -169,7 +179,7 @@ export default {
 .content {
   width: 100%;
   height: 100%;
-  background-image: url('../../public/img/hd.jpg');
+  background-image: url('../../../public/img/hd.jpg');
 }
 
 .ct-login {

@@ -4,7 +4,7 @@
  * Author      : terrorblade
  * Created Date: 2019-01-02 17:06:57
  * Description :  -----
- * Last Modified: 2019-01-11 16:19:53
+ * Last Modified: 2019-01-17 17:54:45
  * Modified By  : -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
  */
@@ -16,8 +16,8 @@ axios.defaults.baseURL = config.baseURL
 // http request 拦截器
 axios.interceptors.request.use(
   config => {
-    if (store.state.token) {
-      config.headers.token = `token ${store.state.token}`
+    if (store.state.common.token) {
+      config.headers.token = `token:${store.state.common.token}`
     }
     return config
   },

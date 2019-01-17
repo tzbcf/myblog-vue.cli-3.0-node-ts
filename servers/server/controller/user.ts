@@ -5,7 +5,7 @@
  * Created Date: 2019-01-09 09:11:01
  * Description : 
  * -----
- * Last Modified: 2019-01-11 16:05:53
+ * Last Modified: 2019-01-17 17:53:20
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
@@ -14,7 +14,7 @@ import { Context } from 'vm';
 import person from '../../lib/common';
 import serviceUser from '../service/user';
 import status from './status';
-import { stat } from 'fs';
+
 class User{
     constructor(){
 
@@ -63,13 +63,18 @@ class User{
             ctx.body = status.param400();
             return;
         }
-        const userData = await serviceUser.findSingleUser(userName);
-        if(userData && !userData.length){
-            ctx.body = status.param504();
-            return;
-        }
-        if(password !== userData[0].password){
-            ctx.body = status.param505();
+        try{
+            const userData = await serviceUser.findSingleUser(userName);
+            if(userData && !userData.length){
+                ctx.body = status.param504();
+                return;
+            }
+            if(password !== userData[0].password){
+                ctx.body = status.param505();
+                return;
+            }
+        }catch(e){
+            ctx.body=status.mysqlErr(JSON.stringify(e));
             return;
         }
         const token =await person.getToken(ctx.request.body).catch(()=>false);//获取token
@@ -82,8 +87,35 @@ class User{
             ctx.body = code;
         }
     };
-    addWechatUser(ctx:Context):void{
-        ctx.body='wechat'
+    async blogAuthorizedLogin(ctx:Context):Promise<any>{
+        const token = ctx.request.header.token;
+        if(!person.decodeToken(token.split(":")[1])){
+            ctx.body = status.param507();
+            return;
+        }
+        try{
+            const flag =await person.verifyToken(token.split(":")[1]);
+            if(Date.now() > flag.iat){
+                ctx.body = status.param506();
+                return
+            }
+            const user = JSON.parse(flag.user);
+            const userData = await serviceUser.findSingleUser(user.userName);
+            if(userData && !userData.length){
+                ctx.body = status.param504();
+                return;
+            }
+            if(user.password !== userData[0].password){
+                ctx.body = status.param505();
+                return;
+            }
+            ctx.body = status.success([user]);
+        }catch(e){
+            ctx.body = status.param507();
+        }
+    };
+    addWechatUser(ctx:Context){
+
     };
 };
 export default new User();

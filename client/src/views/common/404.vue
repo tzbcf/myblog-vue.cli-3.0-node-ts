@@ -5,7 +5,7 @@
  * Created Date: 2018-12-26 14:39:31
  * Description :
  * -----
- * Last Modified: 2018-12-28 15:29:42
+ * Last Modified: 2019-01-17 09:47:23
  * Modified By  :
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
@@ -24,15 +24,15 @@
   </div>
 </template>
 <script>
-import Footer from '../components/common/footer.vue'
+import Footer from "@/components/common/footer.vue";
 export default {
-  data () {
-    return {}
+  data() {
+    return {};
   },
   components: {
     footers: Footer
   }
-}
+};
 </script>
 <style lang="stylus" scoped>
 .content {
@@ -72,7 +72,7 @@ export default {
         font-size: 14px;
         font-weight: 700;
         color: #a9afb5;
-        font-family:'Pacifico', cursive;
+        font-family: 'Pacifico', cursive;
       }
 
       .btn {

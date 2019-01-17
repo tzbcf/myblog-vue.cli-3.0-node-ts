@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
-import Inexistence from './views/404.vue'
-import Index from './components/index.vue'
-import About from './components/about.vue'
+import Home from './views/gateway/Home.vue'
+import Inexistence from './views/common/404.vue'
+import Index from './components/gateway/index.vue'
+import About from './components/gateway/about.vue'
+import leaveWord from './components/gateway/leaveWord.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -20,34 +21,39 @@ export default new Router({
       component: Home,
       children: [
         {
-          path: '/index',
+          path: '/',
           name: 'Index',
           component: Index
         },
         {
-          path: '/',
+          path: '/about',
           name: 'About',
           component: About
+        },
+        {
+          path: '/leave',
+          name: 'leaveWord',
+          component: leaveWord
         }
       ]
     },
     {
       path: '/register',
       name: 'register',
-      component: () => import('./views/register.vue')
+      component: () => import('./views/common/register.vue')
     },
     {
       path: '/login',
       name: 'login',
-      component: () => import('./views/login.vue')
+      component: () => import('./views/common/login.vue')
     },
     {
-      path: '/about',
+      path: '/test',
       name: 'about',
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      component: () => import(/* webpackChunkName: "about" */ './views/gateway/About.vue')
     }
   ]
 })

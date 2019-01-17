@@ -5,7 +5,7 @@
  * Created Date: 2019-01-09 09:42:54
  * Description : 
  * -----
- * Last Modified: 2019-01-11 14:17:09
+ * Last Modified: 2019-01-17 16:49:55
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
@@ -45,4 +45,7 @@ router.post('/api/v1/blog/article/addArticle',article.addBlogArticle);
  */
 
 router.post('/api/v1/blog/user/login',user.blogLogin);
+
+
+router.post('/api/v1/blog/user/authorizedLogin',user.blogAuthorizedLogin);
 export default router;

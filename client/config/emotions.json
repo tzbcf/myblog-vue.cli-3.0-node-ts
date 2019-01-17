@@ -91,12 +91,16 @@
     "/:ok": "https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/89.gif",
     "/:love": "https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/90.gif",
     "/:<L>": "https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/91.gif",
-    "/:jump": "https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/92.gif",
     "/:shake": "https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/93.gif",
     "/:<O>": "https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/94.gif",
     "/:circle": "https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/95.gif",
     "/:kotow": "https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/96.gif",
     "/:turn": "https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/97.gif",
     "/:skip": "https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/98.gif",
-    "/:oY": "https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/99.gif"
+    "/:oY": "https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/99.gif",
+    "/:#-0": "https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/100.gif",
+    "/:hiphot": "https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/101.gif",
+    "/:kiss": "https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/102.gif",
+    "/:<&": "https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/103.gif",
+    "/:&>": "https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/104.gif"
 }

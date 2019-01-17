@@ -51,6 +51,7 @@ module.exports = {
     port: config.port,
     https: false,
     hotOnly: false,
+    disableHostCheck: true,
     proxy: {
       '/api': {
         target: `${config.api.protocol}://${config.api.host}:${config.api.port}`,
