@@ -5,17 +5,18 @@
  * Created Date: 2019-01-09 09:43:08
  * Description : 
  * -----
- * Last Modified: 2019-01-09 10:31:41
+ * Last Modified: 2019-01-18 15:17:27
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
  */
 
 import * as koaRouter from 'koa-router';
-import user from '../controller/user';
+import wechat from '../controller/wechat';
 const router = new koaRouter();
 /**
  * @wechat 微信api接口
  */
-router.post('/api/v1/wechat/user/addUser',user.addWechatUser);
+router.get('/api/v1/wechat/init',wechat.init);
+router.get('/api/v1/wechat/getAccessToken',wechat.getAccessToken);
 export default router;

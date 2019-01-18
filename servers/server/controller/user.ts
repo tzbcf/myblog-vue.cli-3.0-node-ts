@@ -5,7 +5,7 @@
  * Created Date: 2019-01-09 09:11:01
  * Description : 
  * -----
- * Last Modified: 2019-01-17 17:53:20
+ * Last Modified: 2019-01-18 15:17:32
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
@@ -16,8 +16,9 @@ import serviceUser from '../service/user';
 import status from './status';
 
 class User{
+    private a:string;
     constructor(){
-
+        this.a = '1231321';
     };
     async addBlogUser(ctx:Context):Promise<any>{
         const {userName,email,password} = ctx.request.body;
@@ -113,9 +114,6 @@ class User{
         }catch(e){
             ctx.body = status.param507();
         }
-    };
-    addWechatUser(ctx:Context){
-
     };
 };
 export default new User();

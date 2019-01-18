@@ -5,7 +5,7 @@
  * Created Date: 2019-01-08 17:22:20
  * Description : 
  * -----
- * Last Modified: 2019-01-17 17:52:16
+ * Last Modified: 2019-01-18 15:20:33
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
@@ -16,7 +16,9 @@ import * as fsex from 'fs-extra';
 import * as jwt from 'jsonwebtoken';
 import {LOGIN_USER} from '../server/interface/user';
 const config = require(`../config/config.${global['env']}`).default; 
-
+const request = require('request').defaults({
+    'pool': { 'maxSockets': 5000 }
+});
 class Person {
     constructor() {
 
@@ -129,7 +131,7 @@ class Person {
     };
     /**
      * 
-     * @fn 检验token
+     * @fn 解析验证token
      * @param 传递token
      */
     verifyToken(str:string):Promise<any>{
@@ -143,12 +145,62 @@ class Person {
             });
         });
     };
+    /**
+     * 
+     * @fn 解析验证token
+     * @param 传递token
+     */
     decodeToken(str:string):any{
         const decoded = jwt.decode(str, {complete: true});
         if(!decoded){
             return false;
         }
         return decoded;
+    }
+     /**
+     * 
+     * @fn http请求
+     * @param {
+     *          url路径:string,
+     *          data:请求参数
+     *          }
+     */
+    ajax(url:string,method:string,data?:any):Promise<any>{
+        return new Promise((resolve,reject)=>{
+            const opt = {
+                'url':url,
+                'method':method,
+                'timeout': 5000,
+                'pool':false,
+                'headers': {
+                    'content-type': 'application/json;charset=utf-8'
+                },
+                'body':data ? JSON.stringify(data) : ''
+            }
+            request(opt,(err,res,body)=>{
+                console.log('3--------',err)
+                console.log('4--------',res.statusCode)
+                console.log('5--------',body)
+                if(err){
+                    console.log('7--------')
+                    const r = {
+                        'code':110,
+                        'msg':'超时'+err
+                    }
+                    reject(r);
+                }else if(res.statusCode && res.statusCode === 200){
+                    console.log('6--------')
+                    resolve(body)
+                }else{
+                    console.log('8--------')
+                    const r = {
+                        'code':100,
+                        'msg':'服务器异常'
+                    }
+                    reject(r);
+                }
+            });
+        });
     }
 }
 export default new Person();

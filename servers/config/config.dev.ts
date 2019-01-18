@@ -5,7 +5,7 @@
  * Created Date: 2019-01-08 16:55:59
  * Description : 
  * -----
- * Last Modified: 2019-01-17 14:00:53
+ * Last Modified: 2019-01-18 11:59:20
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
@@ -18,7 +18,7 @@ export default {
     "protocol":"http",
     "host":"127.0.0.1",
     "configuration":{//系统配置
-        "port":8000,
+        "port":8080,
         "sysName":"blog"
     },
     "mysql":{//mysql配置
