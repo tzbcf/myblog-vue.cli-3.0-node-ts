@@ -18,7 +18,7 @@ export default {
     "protocol":"http",
     "host":"127.0.0.1",
     "configuration":{//系统配置
-        "port":8080,
+        "port":8000,
         "sysName":"blog"
     },
     "mysql":{//mysql配置

@@ -15,10 +15,11 @@ import * as moment from 'moment';
 import * as fsex from 'fs-extra';
 import * as jwt from 'jsonwebtoken';
 import {LOGIN_USER} from '../server/interface/user';
-const config = require(`../config/config.${global['env']}`).default; 
+import wechatConfig from '../config/wechatConfig';
 const request = require('request').defaults({
     'pool': { 'maxSockets': 5000 }
 });
+const config = require(`../config/config.${global['env']}`).default; //系统配置
 class Person {
     constructor() {
 
@@ -162,8 +163,9 @@ class Person {
      * @fn http请求
      * @param {
      *          url路径:string,
+     *          method请求方式:string
      *          data:请求参数
-     *          }
+     *}
      */
     ajax(url:string,method:string,data?:any):Promise<any>{
         return new Promise((resolve,reject)=>{
@@ -178,21 +180,15 @@ class Person {
                 'body':data ? JSON.stringify(data) : ''
             }
             request(opt,(err,res,body)=>{
-                console.log('3--------',err)
-                console.log('4--------',res.statusCode)
-                console.log('5--------',body)
                 if(err){
-                    console.log('7--------')
                     const r = {
                         'code':110,
                         'msg':'超时'+err
                     }
                     reject(r);
                 }else if(res.statusCode && res.statusCode === 200){
-                    console.log('6--------')
                     resolve(body)
                 }else{
-                    console.log('8--------')
                     const r = {
                         'code':100,
                         'msg':'服务器异常'
@@ -201,6 +197,21 @@ class Person {
                 }
             });
         });
+    }
+     /**
+     * 
+     * @fn 获取微信access_token
+     * @param 
+     */
+    getAccessToken():Promise<any>{
+        return new Promise(async(resolve,reject)=>{
+            const url = `https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${config.appId}&secret=${config.appsecret}`;
+            await this.ajax(url,'GET').then(res=>{
+                resolve(res)
+            }).catch(err=>{
+                reject(err)
+            })
+        })
     }
 }
 export default new Person();

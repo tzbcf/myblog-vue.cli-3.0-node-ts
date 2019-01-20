@@ -36,21 +36,22 @@ class Wechat {
         }
     };
     async getAccessToken(ctx:Context):Promise<void>{
-        const url = `https://api.weixin.qq.com/cgi-bin/token
-            ?grant_type=client_credential&appid=${config.appId}&secret=${config.appsecret}`;
+        const url = `https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${config.appId}&secret=${config.appsecret}`;
         await person.ajax(url,'GET').then(res=>{
-            console.log("10---------",res)
+            ctx.session.access_token = res;
             ctx.body = {
                 'code':0,
                 'token':res
             }
         }).catch(err=>{
-            console.log("9---------",err)
             ctx.body = {
                 'code':0,
                 'token':err
             }
         })
+    }
+    async getSession(ctx:Context):Promise<void>{
+        ctx.body = ctx.session.access_token;
     }
 }
 export default new Wechat();

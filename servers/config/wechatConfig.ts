@@ -12,7 +12,7 @@
  */
 
 export default {
-    "appId" : 'wxb9a4007069baec6b',//wx64039d7e04c6a3e0
-    "appsecret" : 'a37e6b072cc291812cbfe79ae58722ca',//8e1c30f0fbcbc63d6783fc117dacd3d1
+    "appId" : 'wxb9a4007069baec6b',
+    "appsecret" : 'a37e6b072cc291812cbfe79ae58722ca',
     "token" : 'mynameisterrorblade'
 }

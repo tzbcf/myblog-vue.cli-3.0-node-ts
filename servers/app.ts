@@ -24,46 +24,48 @@ import wechatRouter from './server/router/wechat';
 import historyApiFallback from './middleware/historyFillback';
 
 class App {
-    public koa:koa.Application;
-    constructor(){
+    public koa: koa.Application;
+    constructor() {
         this.koa = new koa();
         this.middleware();
         this.router();
         this.onerror();
     };
-    private middleware():void{//中间件
+    private middleware(): void {//中间件
         this.koa.use(historyApiFallback());//vue打包的history模式
-        this.koa.use(koaStatic(path.join(__dirname,'./public')));//静态容器
+        this.koa.use(koaStatic(path.join(__dirname, './public')));//静态容器
         this.koa.use(kosLogger());//日志
         this.koa.use(jsonBody());//json解析
         this.koa.use(bodyparser({
-            enableTypes:['json', 'form', 'text'],
-            onerror(err:any, ctx:any) {
-                logger.logRes(ctx,JSON.stringify(err));
+            enableTypes: ['json', 'form', 'text'],
+            onerror(err: any, ctx: any) {
+                logger.logRes(ctx, JSON.stringify(err));
                 ctx.throw('body parse error', 422);
             }
         }));
-        this.koa.key=['my Name is terrorblade'];
+
+        this.koa.keys = ['some secret hurr'];
         const CONFIG = {
-            'key': 'koa:terrorblade',
-            'maxAge': 86400000,
-            'autoCommit': true, 
-            'overwrite': true, 
-            'signed': true, 
-            'rolling': false, 
-            'renew': false
+            key: 'koa:sess',
+            maxAge: 86400000,
+            overwrite: true,
+            httpOnly: true,
+            signed: true,
+            rolling: false,
+            renew: false,
         };
-        this.koa.use(session(CONFIG, this.koa))
+        const self = this;
+        this.koa.use(session(CONFIG, self.koa));
     };
-    private router():void{//路由
+    private router(): void {//路由
         this.koa.use(commonRouter.routes()).use(commonRouter.allowedMethods());//公共路由
         this.koa.use(blogRouter.routes()).use(blogRouter.allowedMethods());//博客路由
         this.koa.use(wechatRouter.routes()).use(wechatRouter.allowedMethods());//wechat路由
     };
-    private onerror():void{//报错
-        process.on('uncaughtException', (err:any):void=>{
+    private onerror(): void {//报错
+        process.on('uncaughtException', (err: any): void => {
             console.error(JSON.stringify(err.stack));
-            logger.logError(JSON.stringify(err.stack),'uncaughtException');
+            logger.logError(JSON.stringify(err.stack), 'uncaughtException');
         });
     };
 }

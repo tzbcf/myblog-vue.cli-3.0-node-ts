@@ -19,4 +19,5 @@ const router = new koaRouter();
  */
 router.get('/api/v1/wechat/init',wechat.init);
 router.get('/api/v1/wechat/getAccessToken',wechat.getAccessToken);
+router.get('/api/v1/wechat/getSession',wechat.getSession);
 export default router;
