@@ -14,6 +14,7 @@ import * as fs from 'fs';
 import * as moment from 'moment';
 import * as fsex from 'fs-extra';
 import * as jwt from 'jsonwebtoken';
+import * as path from 'path';
 import {LOGIN_USER} from '../server/interface/user';
 import wechatConfig from '../config/wechatConfig';
 const request = require('request').defaults({
@@ -110,6 +111,23 @@ class Person {
         if (myReg.test(str)) return true;
         return false;
     };
+     /**
+     * 
+     * @fn 检验参数是否是邮箱
+     * @param 传递一个字符串
+     */
+    isJson(str: string): boolean {
+        if (typeof str == 'string') {
+            try {
+                JSON.parse(str);
+                return true;
+            } catch(e) {
+                return false;
+            }    
+        }else{
+            return false
+        }
+    };
     /**
      * 
      * @fn 获取token
@@ -168,6 +186,7 @@ class Person {
      *}
      */
     ajax(url:string,method:string,data?:any):Promise<any>{
+        const self = this;
         return new Promise((resolve,reject)=>{
             const opt = {
                 'url':url,
@@ -187,7 +206,11 @@ class Person {
                     }
                     reject(r);
                 }else if(res.statusCode && res.statusCode === 200){
-                    resolve(body)
+                    if(!self.isJson(body)){
+                        resolve(body)
+                    }else{
+                        resolve(JSON.parse(body))
+                    }
                 }else{
                     const r = {
                         'code':100,
@@ -198,16 +221,45 @@ class Person {
             });
         });
     }
+    /**************************************------wechat api---***************************************************/
+    /**
+     * wechat 获取token
+     */
+    async getAccessToken(){
+        const self = this;
+        const filePath = path.resolve(__dirname,'../config/wechat.txt');
+        try{
+            const wechat_token = JSON.parse(fs.readFileSync(filePath,'utf-8'));
+            if(!wechat_token || !wechat_token.access_token || !wechat_token.expires_in){//如果其中不存在，获取access_token
+                return await self.gainAccessToken();
+            }
+            const now = new Date().getTime();
+            if(now > wechat_token.expires_in){//如果时间过期，获取access_token
+                return await self.gainAccessToken();
+            }else{
+                return wechat_token;
+            }
+        }catch(e){//如果其中报错！从新获取access_token
+            return await self.gainAccessToken();
+        }
+    }
      /**
      * 
      * @fn 获取微信access_token
      * @param 
      */
-    getAccessToken():Promise<any>{
+    gainAccessToken():Promise<any>{
         return new Promise(async(resolve,reject)=>{
-            const url = `https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${config.appId}&secret=${config.appsecret}`;
+            const url = `https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${wechatConfig.appId}&secret=${wechatConfig.appsecret}`;
             await this.ajax(url,'GET').then(res=>{
-                resolve(res)
+                const expires_in = new Date().getTime()+res.expires_in*1000 - 20000;
+                const filePath = path.resolve(__dirname,'../config/wechat.txt') 
+                const wechat_token = {
+                    "access_token":res.access_token,
+                    "expires_in":expires_in
+                };
+                fs.writeFileSync(filePath,JSON.stringify(wechat_token),'utf-8');
+                resolve(wechat_token)
             }).catch(err=>{
                 reject(err)
             })

@@ -13,12 +13,14 @@
 import * as sha1 from 'sha1';
 import person from '../../lib/common';
 import config from '../../config/wechatConfig';
-import { Context } from 'vm';
+import { Context, createContext } from 'vm';
+import status from './status';
 class Wechat {
     constructor() {
 
     };
-    init(ctx:Context):void{
+    async init(ctx:Context):Promise<void>{
+        await person.getAccessToken();
         const signature = ctx.query.signature || '',
             timestamp = ctx.query.timestamp || '',
             nonce = ctx.query.nonce || '',
@@ -29,29 +31,8 @@ class Wechat {
         if (result === signature) {
             ctx.body = ctx.query.echostr;
         } else {
-            ctx.body = {
-                code: -1,
-                msg: "fail"
-            }
+            ctx.body = status.unusual();
         }
     };
-    async getAccessToken(ctx:Context):Promise<void>{
-        const url = `https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${config.appId}&secret=${config.appsecret}`;
-        await person.ajax(url,'GET').then(res=>{
-            ctx.session.access_token = res;
-            ctx.body = {
-                'code':0,
-                'token':res
-            }
-        }).catch(err=>{
-            ctx.body = {
-                'code':0,
-                'token':err
-            }
-        })
-    }
-    async getSession(ctx:Context):Promise<void>{
-        ctx.body = ctx.session.access_token;
-    }
 }
 export default new Wechat();

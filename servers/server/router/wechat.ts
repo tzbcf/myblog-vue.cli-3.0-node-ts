@@ -18,6 +18,4 @@ const router = new koaRouter();
  * @wechat 微信api接口
  */
 router.get('/api/v1/wechat/init',wechat.init);
-router.get('/api/v1/wechat/getAccessToken',wechat.getAccessToken);
-router.get('/api/v1/wechat/getSession',wechat.getSession);
 export default router;
