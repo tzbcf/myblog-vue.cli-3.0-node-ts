@@ -5,7 +5,7 @@
  * Created Date: 2019-01-08 17:22:20
  * Description : 
  * -----
- * Last Modified: 2019-01-18 15:20:33
+ * Last Modified: 2019-01-21 15:47:15
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
@@ -16,7 +16,6 @@ import * as fsex from 'fs-extra';
 import * as jwt from 'jsonwebtoken';
 import * as path from 'path';
 import {LOGIN_USER} from '../server/interface/user';
-import wechatConfig from '../config/wechatConfig';
 const request = require('request').defaults({
     'pool': { 'maxSockets': 5000 }
 });
@@ -220,50 +219,6 @@ class Person {
                 }
             });
         });
-    }
-    /**************************************------wechat api---***************************************************/
-    /**
-     * wechat 获取token
-     */
-    async getAccessToken(){
-        const self = this;
-        const filePath = path.resolve(__dirname,'../config/wechat.txt');
-        try{
-            const wechat_token = JSON.parse(fs.readFileSync(filePath,'utf-8'));
-            if(!wechat_token || !wechat_token.access_token || !wechat_token.expires_in){//如果其中不存在，获取access_token
-                return await self.gainAccessToken();
-            }
-            const now = new Date().getTime();
-            if(now > wechat_token.expires_in){//如果时间过期，获取access_token
-                return await self.gainAccessToken();
-            }else{
-                return wechat_token;
-            }
-        }catch(e){//如果其中报错！从新获取access_token
-            return await self.gainAccessToken();
-        }
-    }
-     /**
-     * 
-     * @fn 获取微信access_token
-     * @param 
-     */
-    gainAccessToken():Promise<any>{
-        return new Promise(async(resolve,reject)=>{
-            const url = `https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${wechatConfig.appId}&secret=${wechatConfig.appsecret}`;
-            await this.ajax(url,'GET').then(res=>{
-                const expires_in = new Date().getTime()+res.expires_in*1000 - 20000;
-                const filePath = path.resolve(__dirname,'../config/wechat.txt') 
-                const wechat_token = {
-                    "access_token":res.access_token,
-                    "expires_in":expires_in
-                };
-                fs.writeFileSync(filePath,JSON.stringify(wechat_token),'utf-8');
-                resolve(wechat_token)
-            }).catch(err=>{
-                reject(err)
-            })
-        })
     }
 }
 export default new Person();

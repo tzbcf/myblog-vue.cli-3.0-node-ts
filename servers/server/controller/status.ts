@@ -5,7 +5,7 @@
  * Created Date: 2019-01-09 10:58:30
  * Description : 
  * -----
- * Last Modified: 2019-01-17 17:39:24
+ * Last Modified: 2019-01-21 16:35:41
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
@@ -93,6 +93,11 @@ class Status{
     param507():API_STATUS{
         this.code = -507,
         this.msg = 'token不合法';
+        return {'code':this.code,'msg':this.msg}
+    };
+    param4001():API_STATUS{
+        this.code = -4001,
+        this.msg = '服务器来源不合法';
         return {'code':this.code,'msg':this.msg}
     };
 }

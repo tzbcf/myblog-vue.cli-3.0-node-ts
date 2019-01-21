@@ -5,7 +5,7 @@
  * Created Date: 2019-01-09 09:11:01
  * Description : 
  * -----
- * Last Modified: 2019-01-18 15:17:32
+ * Last Modified: 2019-01-21 12:06:02
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
@@ -16,9 +16,7 @@ import serviceUser from '../service/user';
 import status from './status';
 
 class User{
-    private a:string;
     constructor(){
-        this.a = '1231321';
     };
     async addBlogUser(ctx:Context):Promise<any>{
         const {userName,email,password} = ctx.request.body;
