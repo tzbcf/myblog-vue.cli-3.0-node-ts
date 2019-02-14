@@ -1,4 +1,4 @@
-{
+export default {
     "appenders": {
         "rule-console": {
             "type": "console"

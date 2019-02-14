@@ -13,14 +13,14 @@
 import * as log4js from 'log4js';
 import * as path from 'path';
 import person from './common';
-
+import logConfig from '../config/logConfig';
 class Logger {
     private logConfig:any;
     private resLogger:any;
     private errorLogger:any;
     private consoleLogger:any;
     constructor() { 
-        this.logConfig = require('../config/logConfig.json');
+        this.logConfig = logConfig;
         this.initLogPath();
         log4js.configure(this.logConfig);
         this.resLogger = log4js.getLogger("resLogger");
