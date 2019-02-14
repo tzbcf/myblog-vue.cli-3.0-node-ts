@@ -13,7 +13,7 @@
 import { Context } from 'vm';
 import person from '../../lib/common';
 import serviceUser from '../service/user';
-import status from './status';
+import status from '../../lib/status';
 
 class User{
     constructor(){

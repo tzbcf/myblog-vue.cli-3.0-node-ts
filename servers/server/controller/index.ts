@@ -11,7 +11,7 @@
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
  */
 import { Context } from "vm";
-import status from './status';
+import status from '../../lib/status';
 const config = require(`../../config/config.${global['env']}`).default;
 class Common{
     constructor(){

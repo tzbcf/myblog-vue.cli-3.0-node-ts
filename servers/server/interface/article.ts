@@ -16,4 +16,11 @@ export interface ACTICLE_DETAILS{
     title:string,
     content:string
 }
+export interface ACTICLE_LIST{
+    page:number,
+    pageIndex:number,
+    startTime:string,
+    endTime:string
+}
+
 

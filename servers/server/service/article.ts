@@ -12,13 +12,17 @@
  */
 
 import modelArticle from '../model/article';
-import {ACTICLE_DETAILS} from '../interface/article';
+import {ACTICLE_DETAILS,ACTICLE_LIST} from '../interface/article';
 class ServiceArticle {
     constructor(){
 
     };
     async addArticle(data:ACTICLE_DETAILS){
         const result = await modelArticle.insertArticle(data);
+        return result;
+    };
+    async getArticleList(data:ACTICLE_LIST){
+        const result = await modelArticle.getArticleList(data);
         return result;
     };
 };

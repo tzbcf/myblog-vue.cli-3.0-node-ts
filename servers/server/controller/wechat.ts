@@ -12,7 +12,7 @@
  */
 import config from '../../config/wechatConfig';
 import { Context, createContext } from 'vm';
-import status from './status';
+import status from '../../lib/status';
 import wecaht from '../../lib/wechat';
 import * as rawBody from 'raw-body';
 class Wechat {

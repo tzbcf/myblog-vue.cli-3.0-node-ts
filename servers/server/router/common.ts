@@ -29,6 +29,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 /**
  * @common 公共api接口
+ * 图片下载
  */
 router.post('/api/v1/common/uploadImg',upload.single('file'),common.uploadImg);
 export default router;
