@@ -26,19 +26,19 @@
         <nav>
           <ul>
             <li>
-              <router-link to>首页</router-link>
+              <router-link to="/">首页</router-link>
             </li>
             <li>
-              <router-link to>分享</router-link>
+              <router-link to="/">分享</router-link>
             </li>
             <li>
-              <router-link to>杂记</router-link>
+              <router-link to="/">杂记</router-link>
             </li>
             <li>
               <router-link to="/about">关于</router-link>
             </li>
             <li>
-              <router-link to="/">留言</router-link>
+              <router-link to="/leaveWord">留言</router-link>
             </li>
             <li>
               <router-link to class="fa fa-user-circle fa-2x"></router-link>

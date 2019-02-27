@@ -10,6 +10,7 @@
   "dependencies": {
     "@tinymce/tinymce-vue": "^1.1.0",
     "axios": "^0.18.0",
+    "element-ui": "^2.5.4",
     "md5": "^2.2.1",
     "qq-wechat-emotion-parser": "^1.0.4",
     "tinymce": "^4.9.2",

@@ -20,7 +20,7 @@
             <p>登录您的页面帐户</p>
           </div>
           <div class="login-from">
-            <div class="ipt-from-item" v-for="(list,index) in nameList">
+            <div class="ipt-from-item" v-for="(list,index) in nameList" :key="list">
               <div class="ipt-text">
                 <div class="ipt-label">
                   <label
@@ -158,7 +158,7 @@ export default {
   mounted() {
     this.getStorage();
     const self = this;
-     self.axios
+    self.axios
         .post(self.apiJson.authorizedLogin).then((result)=>{
         self.$store.commit("SET_TOAST_DATA", {
             type: "done",

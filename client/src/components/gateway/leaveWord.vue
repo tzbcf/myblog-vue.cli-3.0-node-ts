@@ -28,7 +28,7 @@
                                 表情
                             </span>
                              <div class="emotion" v-if="showEmotionFlag">
-                                <a v-for="item in emotionList"  href="javascript:;" @click="refer(item.key)">
+                                <a v-for="item in emotionList"  href="javascript:;" @click="refer(item.key)" :key="item">
                                     <img :src="item.url" alt="">
                                 </a>
                             </div>
