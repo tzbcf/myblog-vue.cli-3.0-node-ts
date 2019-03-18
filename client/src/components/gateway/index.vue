@@ -22,7 +22,10 @@ export default {
       b: true
     };
   },
-  mounted() {}
+  mounted() {},
+  computed:{
+  
+  }
 };
 </script>
 
