@@ -1,26 +1,29 @@
-# 1. client
+# client
 
-## 1.1. Project setup
+## Project setup
 ```
 npm install
 ```
 
-### 1.1.1. Compiles and hot-reloads for development
+### Compiles and hot-reloads for development
 ```
 npm run serve
 ```
 
-### 1.1.2. Compiles and minifies for production
+### Compiles and minifies for production
 ```
 npm run build
 ```
 
-### 1.1.3. Run your tests
+### Run your tests
 ```
 npm run test
 ```
 
-### 1.1.4. Lints and fixes files
+### Lints and fixes files
 ```
 npm run lint
 ```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).

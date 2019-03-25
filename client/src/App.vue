@@ -1,69 +1,29 @@
 <template>
   <div id="app">
-    <router-view></router-view>
-    <Toast></Toast>
+    <router-view/>
   </div>
 </template>
-<script>
-// g1i0fci7zy2uondbkh7i6a4xwwfo1gpnzyu2yfvdvm9t3rg0
-import Toast from "./components/common/toast.vue";
-export default {
-  components: {
-    Toast
-  },
-  data() {
-    return {};
-  }
-};
-</script>
 
 <style lang="stylus">
 #app {
-  width: 100%;
-  height: 100%;
-  overflow hidden
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;  
+  color: #2c3e50;
+  height 100%;
 }
 
-.login-btn {
-  display: block;
-  background-color: #039be5;
-  color: #fff;
-  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2), 0 0 0 0 rgba(0, 0, 0, 0.14), 0 0 0 0 rgba(0, 0, 0, 0.12);
-  cursor: pointer;
-  box-sizing: border-box;
-  text-align: center;
-  border-radius: 4px;
-  overflow: visible;
-  line-height: 35px;
-}
+#nav {
+  padding: 30px;
 
-.col-red {
-  color: red;
-}
+  a {
+    font-weight: bold;
+    color: #2c3e50;
 
-.mb-20 {
-  margin-bottom: 20px;
-}
-
-.mb-80 {
-  margin-bottom: 80px;
-}
-
-.pb-20 {
-  padding-bottom: 20px;
-}
-
-.cl:after{
-  display:block;
-  clear:both;
-  content:"";
-  visibility:hidden;
-  height:0
-}
-
-.cl{
-  zoom 1
+    &.router-link-exact-active {
+      color: #42b983;
+    }
+  }
 }
 </style>

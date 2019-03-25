@@ -1,18 +1,20 @@
 /*
- * FileName    : footer.vue
+ * FileName : footer.vue
  * ProjectName : client
- * Author      : terrorblade
- * Created Date: 2018-12-26 14:45:30
- * Description :
+ * Author : terrorblade
+ * Created Date: 2019-03-19 15:01:56
+ * Description : 
  * -----
- * Last Modified: 2019-01-17 09:48:17
- * Modified By  :
+ * Last Modified: 2019-03-25 11:24:40
+ * Modified By : 
  * -----
- * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
+ * Copyright (c) 2019 XXX Corporation. All rights reserved.
  */
+
+
 <template>
-  <div class="content-footer">
-    <div class="ct-footer">
+  <div class="container-footer">
+    <div class="footer">
       <h6>WEBSITE BY Terrorblade</h6>
       <p>© 2018. All RIGHT RESERVED.</p>
       <p>
@@ -24,7 +26,7 @@
           href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030602003348"
           style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"
         >
-          <img src="img/bgicon.png" style="float:left;">
+          <img src="/img/bgicon.png" style="float:left;">
           <p
             style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px"
           >粤公网安备 44030602003348号</p>
@@ -33,14 +35,22 @@
     </div>
   </div>
 </template>
-<style lang="stylus" scoped>
-.content-footer {
-  padding-top: 60px;
 
-  .ct-footer {
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+
+@Component
+export default class Footer extends Vue {}
+</script>
+
+
+<style lang="stylus" scoped>
+.container-footer {
+  padding-top: 2rem;
+  .footer {
     h6, p, a {
-      margin: 0 0 14px;
-      font-size: 14px;
+      margin: 0 0 0.7rem;
+      font-size: 0.7rem;
       font-weight: 500;
       color: #B9B9B9;
       letter-spacing: 1px;
@@ -48,3 +58,6 @@
   }
 }
 </style>
+
+
+

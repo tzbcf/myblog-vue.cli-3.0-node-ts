@@ -1,42 +1,50 @@
+/*
+ * FileName : Home.vue
+ * ProjectName : client
+ * Author : terrorblade
+ * Created Date: 2019-03-19 12:01:00
+ * Description : 
+ * -----
+ * Last Modified: 2019-03-22 11:33:21
+ * Modified By : 
+ * -----
+ * Copyright (c) 2019 XXX Corporation. All rights reserved.
+ */
+
 <template>
   <div class="home">
-    <Header class="header"></Header>
-    <main class="hm-main">
-      <section class="section">
-        <router-view></router-view>
-      </section>
-    </main>
-    <Footer class="footer"></Footer>
+    <aside>
+      <Aside></Aside>
+    </aside>
+    <section>
+      <router-view/>
+    </section>
+    <footer>
+       <Footer></Footer>  
+    </footer>
   </div>
 </template>
 
-<script>
-import Footer from "@/components/common/footer.vue";
-import Header from "@/components/common/header.vue";
-export default {
-  name: "home",
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+import Footer from '@/components/common/Footer.vue';
+import Aside from '@/components/gateway/Aside.vue';
+
+@Component({
   components: {
-    Footer,
-    Header
-  }
-};
+    Footer, Aside,
+  },
+})
+export default class Home extends Vue {}
 </script>
+
 <style lang="stylus" scoped>
-.home {
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-
-  .header {
-    width: 100%;
-    position: fixed;
-    top: 0;
-  }
-
-  .hm-main {
-    width: 1300px;
-    margin: 0 auto;
-    padding-top: 80px;
-  }
-}
+.home
+  display flex
+  justify-content center
+  height 100%
+  aside
+    width 20rem
+  footer 
+    width 100%  
 </style>

@@ -5,7 +5,9 @@
 </template>
 <script>
 import "tinymce";
-import { tinyConfig } from "../../../config/tinymce.js";
+import tinyConfig from "../../config/tinymce.js";
+window.tinymce.baseURL = "/tinymce";
+// window.tinymce.suffix = ".min";
 export default {
   name: "mceeditor",
   data() {
@@ -98,14 +100,14 @@ export default {
     uploadPic(blobInfo, success, failure) {
       const formData = new FormData();
       formData.append("file", blobInfo.blob(), blobInfo.filename());
-      this.axios
-        .post(this.apiJson.uploadApi, formData)
-        .then(result => {
-          success(result.datas.url);
-        })
-        .catch(err => {
-          failure("上传失败");
-        });
+      // this.axios
+      //   .post(this.apiJson.uploadApi, formData)
+      //   .then(result => {
+      //     success(result.datas.url);
+      //   })
+      //   .catch(err => {
+      //     failure("上传失败");
+      //   });
     }
   }
 };

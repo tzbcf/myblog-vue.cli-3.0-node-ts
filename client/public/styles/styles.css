@@ -1,0 +1,51 @@
+/*
+ * FileName : styles.css
+ * ProjectName : client
+ * Author : terrorblade
+ * Created Date: 2019-03-19 11:26:57
+ * Description : 
+ * -----
+ * Last Modified: 2019-03-22 16:00:00
+ * Modified By : 
+ * -----
+ * Copyright (c) 2019 XXX Corporation. All rights reserved.
+ */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 20px;
+}
+
+html,
+body {
+    -webkit-font-smoothing: auto;
+    -moz-osx-font-smoothing: auto;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    user-select: none;
+    width: 100%;
+    height:100%; 
+}
+
+a{
+    text-decoration: none;
+}
+.mb10{
+    margin-bottom: 0.5rem;
+}
+.login-btn {
+    display: block;
+    background-color: #039be5;
+    color: #fff;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2), 0 0 0 0 rgba(0, 0, 0, 0.14), 0 0 0 0 rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+    box-sizing: border-box;
+    text-align: center;
+    border-radius: 4px;
+    overflow: visible;
+    line-height: 35px;
+  }
