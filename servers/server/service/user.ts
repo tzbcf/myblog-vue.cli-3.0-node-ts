@@ -5,14 +5,14 @@
  * Created Date: 2019-01-09 15:56:38
  * Description : 
  * -----
- * Last Modified: 2019-01-11 10:34:39
+ * Last Modified: 2019-05-05 14:34:15
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
  */
 
 import modelUser from '../model/user';
-import {REGISTER_USER} from '../interface/user';
+import {REGISTER_USER} from '../../interface/user';
 class ServiceUser {
     constructor(){
 

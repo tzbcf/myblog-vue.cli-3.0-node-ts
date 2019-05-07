@@ -5,14 +5,14 @@
  * Created Date: 2019-01-09 10:39:13
  * Description : 
  * -----
- * Last Modified: 2019-01-11 10:24:49
+ * Last Modified: 2019-05-05 14:34:08
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
  */
 
 import modelArticle from '../model/article';
-import {ACTICLE_DETAILS,ACTICLE_LIST} from '../interface/article';
+import {ACTICLE_DETAILS,ACTICLE_LIST} from '../../interface/article';
 class ServiceArticle {
     constructor(){
 

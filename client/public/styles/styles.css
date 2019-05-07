@@ -5,7 +5,7 @@
  * Created Date: 2019-03-19 11:26:57
  * Description : 
  * -----
- * Last Modified: 2019-03-22 16:00:00
+ * Last Modified: 2019-03-26 16:29:53
  * Modified By : 
  * -----
  * Copyright (c) 2019 XXX Corporation. All rights reserved.
@@ -36,6 +36,15 @@ a{
 }
 .mb10{
     margin-bottom: 0.5rem;
+}
+.ml10{
+    margin-left: 0.5rem;
+}
+.mr20{
+    margin-right: 1rem;
+}
+.mr10{
+    margin-right: 0.5rem;
 }
 .login-btn {
     display: block;

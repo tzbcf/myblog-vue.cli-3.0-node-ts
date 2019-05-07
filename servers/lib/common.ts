@@ -5,7 +5,7 @@
  * Created Date: 2019-01-08 17:22:20
  * Description : 
  * -----
- * Last Modified: 2019-01-21 15:47:15
+ * Last Modified: 2019-05-06 17:11:43
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
@@ -15,7 +15,7 @@ import * as moment from 'moment';
 import * as fsex from 'fs-extra';
 import * as jwt from 'jsonwebtoken';
 import * as path from 'path';
-import {LOGIN_USER} from '../server/interface/user';
+import {LOGIN_USER} from '../interface/user';
 const request = require('request').defaults({
     'pool': { 'maxSockets': 5000 }
 });

@@ -5,7 +5,7 @@
  * Created Date: 2019-01-09 10:39:24
  * Description : 
  * -----
- * Last Modified: 2019-01-11 10:25:19
+ * Last Modified: 2019-05-05 14:34:26
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
@@ -13,7 +13,7 @@
 
 import {db} from './db';
 import person from '../../lib/common';
-import {ACTICLE_DETAILS,ACTICLE_LIST} from '../interface/article';
+import {ACTICLE_DETAILS,ACTICLE_LIST} from '../../interface/article';
 class ModelArticle {
     constructor(){
 

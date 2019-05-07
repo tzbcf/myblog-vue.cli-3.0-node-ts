@@ -5,18 +5,18 @@
   </div>
 </template>
 <script>
-import mceeditor from "@/components/common/tinymce.vue";
+import mceeditor from '@/components/common/tinymce.vue';
 
 export default {
-  name: "editor-demo",
+  name: 'editor-demo',
   components: {
-    mceeditor
+    mceeditor,
   },
-  data () {
+  data() {
     return {
-      editorValue: ""
+      editorValue: '',
     };
-  }
+  },
 };
 </script>
 <style scoped>
