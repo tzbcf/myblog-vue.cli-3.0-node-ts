@@ -1,0 +1,37 @@
+
+
+### 4005
+POST https://qny-fm.tingdao.com/v3/detail?c=4005 HTTP/1.1
+
+Content-Type: application/json
+
+{    
+    "base" : {        
+        "userid" : "330004025804185600",        
+        "caller" : "18627556209",       
+        "imei" : "db658275cf708690c350ec01b3f6e863db6627a4",      
+        "ua" : "apple|iPhone|iPhone9,1|12.0.1|750*1334",      
+        "version" : "2.1",        
+        "osid" : "ios",     
+        "apn" : "wifi",        
+        "df" : "22010000",        
+        "sid" : "fcfd58a3-1249-4fc8-9410-1d36f876bf48"    
+    },    
+    "param":{         
+        "offset":"1",        
+        "sortOrder":"1",        
+        "count": "1",        
+        "type": "5",        
+        "cid":"7450958619746304"    
+    }
+}
+
+###
+POST http://localhost:8000/api/v1/blog/user/login HTTP/1.1
+Content-Type: application/json
+
+{
+	"userName":"asbsadb",
+	"password":"asdadsada"
+}
+

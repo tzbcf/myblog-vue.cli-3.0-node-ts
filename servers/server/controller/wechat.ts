@@ -5,7 +5,7 @@
  * Created Date: 2019-01-18 11:14:34
  * Description : 
  * -----
- * Last Modified: 2019-01-21 17:58:01
+ * Last Modified: 2019-07-05 11:33:32
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
@@ -14,6 +14,8 @@ import config from '../../config/wechatConfig';
 import { Context, createContext } from 'vm';
 import status from '../../lib/status';
 import wecaht from '../../lib/wechat';
+import {USER_TOKEN} from '../../interface/weChat';
+// import common from '../../lib/common';
 import * as rawBody from 'raw-body';
 class Wechat {
     constructor() {
@@ -54,6 +56,20 @@ class Wechat {
         } else {
             ctx.body = status.param4001();
         }
+    }
+    async getUserInfo(ctx:Context):Promise<void> {
+        console.log('ctx------',ctx.request.body);
+        const req = ctx.request.body;
+        let codeTokenData: any = await wecaht.getCodeToken(req.code);
+        const verifyToken =  await wecaht.verifyToken(codeTokenData.access_token, codeTokenData.openid);
+        if (parseInt(verifyToken.errcode,10)) {
+            codeTokenData = await wecaht.refreshToken(codeTokenData.refresh_token)
+        }
+        const userinfo = await wecaht.getUserInfo(codeTokenData.access_token, codeTokenData.openid);
+        ctx.body = {
+            code: 0,
+            data: userinfo,
+        };
     }
 }
 export default new Wechat();

@@ -5,7 +5,7 @@
  * Created Date: 2019-03-22 14:30:23
  * Description : 
  * -----
- * Last Modified: 2019-03-25 10:14:02
+ * Last Modified: 2019-05-13 15:29:37
  * Modified By : 
  * -----
  * Copyright (c) 2019 芒果动听 Corporation. All rights reserved.
@@ -32,8 +32,8 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import Footer from '@/components/common/Footer.vue';
-import Aside from '@/components/admin/Aside.vue';
-import Header from '@/components/admin/Header.vue';
+import Aside from '@/views/admin/Aside.vue';
+import Header from '@/views/admin/Header.vue';
 
 @Component({
   components: {

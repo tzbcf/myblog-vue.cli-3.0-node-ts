@@ -5,7 +5,7 @@
  * Created Date: 2019-01-09 09:43:08
  * Description : 
  * -----
- * Last Modified: 2019-01-21 16:15:37
+ * Last Modified: 2019-06-25 19:30:40
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
@@ -19,4 +19,6 @@ const router = new koaRouter();
  */
 router.get('/api/v1/wechat/init',wechat.init);
 router.post('/api/v1/wechat/init',wechat.postInit);
+router.post('/api/v1/wechat/getUserInfo',wechat.getUserInfo);
+
 export default router;

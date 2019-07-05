@@ -5,7 +5,7 @@
  * Created Date: 2019-01-08 16:55:59
  * Description : 
  * -----
- * Last Modified: 2019-01-18 11:59:20
+ * Last Modified: 2019-06-27 17:57:58
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
@@ -22,9 +22,9 @@ export default {
         "sysName":"blog"
     },
     "mysql":{//mysql配置
-        "host"     : "127.0.0.1",
-        "user"     : "root",
-        "password" : "root",
+        "host"     : "94.191.9.198",
+        "user"     : "test",
+        "password" : "test1234",
         "database" : "blog"
     },
     "cert":"my name is Terrorblade"

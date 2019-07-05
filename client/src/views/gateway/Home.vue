@@ -5,7 +5,7 @@
  * Created Date: 2019-03-19 12:01:00
  * Description : 
  * -----
- * Last Modified: 2019-03-22 11:33:21
+ * Last Modified: 2019-05-13 15:29:17
  * Modified By : 
  * -----
  * Copyright (c) 2019 XXX Corporation. All rights reserved.
@@ -28,7 +28,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import Footer from '@/components/common/Footer.vue';
-import Aside from '@/components/gateway/Aside.vue';
+import Aside from '@/views/gateway/Aside.vue';
 
 @Component({
   components: {
