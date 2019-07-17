@@ -6,7 +6,7 @@ import { Context } from 'vm';
  * Created Date: 2019-01-21 15:45:12
  * Description : 
  * -----
- * Last Modified: 2019-07-05 11:30:26
+ * Last Modified: 2019-07-17 12:34:21
  * Modified By : 
  * -----
  * Copyright (c) 2019 XXX Corporation. All rights reserved.
@@ -15,14 +15,18 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as sha1 from 'sha1';
 import * as xml2js from 'xml2js';
+import * as crypto from 'crypto';
 import person from './common';
-import wechatConfig from '../config/wechatConfig';
 import config from '../config/wechatConfig';
 import {USER_TOKEN} from '../interface/weChat';
-import { resolve } from 'dns';
 const parseString = xml2js.parseString;
 class Wechat {
-  constructor() {}
+  private waAppid: string;
+  private sessionKey: string;
+  constructor() {
+    this.waAppid = config.weAppId;
+    this.sessionKey = '';
+  }
   /**
    * verifyWxReq 加密数据用于验证服务器来源
    */
@@ -70,8 +74,8 @@ class Wechat {
   gainAccessToken(): Promise<any> {
     return new Promise(async (resolve, reject) => {
       const url = `https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${
-        wechatConfig.appId
-      }&secret=${wechatConfig.appsecret}`;
+        config.appId
+      }&secret=${config.appsecret}`;
       await person
         .ajax(url, "GET")
         .then(res => {
@@ -132,7 +136,7 @@ class Wechat {
   getCodeToken(code: string): Promise<USER_TOKEN> {
     return new Promise(async (resolve, reject) => {
       const url = `https://api.weixin.qq.com/sns/oauth2/access_token?`+
-            `appid=${wechatConfig.appId}&secret=${wechatConfig.appsecret}&code=${code}&grant_type=authorization_code`;
+            `appid=${config.appId}&secret=${config.appsecret}&code=${code}&grant_type=authorization_code`;
       await person
         .ajax(url, "GET")
         .then(res => {
@@ -189,7 +193,7 @@ class Wechat {
    */
   refreshToken(refreshToken: string): Promise<any> {
     return new Promise(async (resolve, reject) => {
-      const url = `https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=${wechatConfig.appId}&grant_type=refresh_token&refresh_token=${refreshToken}`;
+      const url = `https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=${config.appId}&grant_type=refresh_token&refresh_token=${refreshToken}`;
       await person
         .ajax(url, "GET")
         .then(res => {
@@ -200,6 +204,77 @@ class Wechat {
           reject(err);
         });
     });
+  }
+
+     /**
+   *
+   * @fn 小程序登陆
+   * @param
+   */
+  weAppLogin(code: string): Promise<any> {
+    return new Promise(async (resolve, reject) => {
+      const url = `https://api.weixin.qq.com/sns/jscode2session?appid=${config.weAppId}&secret=${config.weAppSecret}&js_code=${code}&grant_type=authorization_code`;
+      await person
+        .ajax(url, "GET")
+        .then(res => {
+            resolve(res);
+            console.log("========res3==",res)
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
+    /**
+   *
+   * @fn 小程序获取token
+   * @param
+   */
+  weGetAccessToken(): Promise<any> {
+    return new Promise(async (resolve, reject) => {
+      const url = `https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${config.weAppId}&secret=${config.weAppSecret}`;
+      await person
+        .ajax(url, "GET")
+        .then(res => {
+            resolve(res);
+            console.log("========res3==",res)
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
+    /**
+   *
+   * @fn 小程序解密数据
+   * @param
+   */
+  decryptData(encryptedData: string, iv: string, sessionKeys: string): any {
+    this.sessionKey = sessionKeys;
+     // base64 decode
+    const sessionKey = new Buffer(this.sessionKey, 'base64');
+    const encryptedDatas = new Buffer(encryptedData, 'base64');
+    const ivs = new Buffer(iv, 'base64');
+    let decoded;
+    try {
+      // 解密
+      const decipher = crypto.createDecipheriv('aes-128-cbc', sessionKey, ivs);
+      // 设置自动 padding 为 true，删除填充补位
+      decipher.setAutoPadding(true);
+      decoded = decipher.update(encryptedDatas, 'binary', 'utf8');
+      decoded += decipher.final('utf8');
+      
+      decoded = JSON.parse(decoded);
+
+    } catch (err) {
+      throw new Error('Illegal Buffer');
+    }
+
+    if (decoded.watermark.appid !== this.waAppid) {
+      throw new Error('Illegal Buffer')
+    }
+
+    return decoded
   }
 }
 

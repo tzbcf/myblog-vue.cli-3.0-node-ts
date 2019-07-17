@@ -5,7 +5,7 @@
  * Created Date: 2019-01-18 11:14:34
  * Description : 
  * -----
- * Last Modified: 2019-07-05 11:33:32
+ * Last Modified: 2019-07-17 12:41:47
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
@@ -56,9 +56,8 @@ class Wechat {
         } else {
             ctx.body = status.param4001();
         }
-    }
+    };
     async getUserInfo(ctx:Context):Promise<void> {
-        console.log('ctx------',ctx.request.body);
         const req = ctx.request.body;
         let codeTokenData: any = await wecaht.getCodeToken(req.code);
         const verifyToken =  await wecaht.verifyToken(codeTokenData.access_token, codeTokenData.openid);
@@ -70,6 +69,18 @@ class Wechat {
             code: 0,
             data: userinfo,
         };
+    };
+    async weAppLogin(ctx:Context):Promise<void> {
+        const loginData = await wecaht.weAppLogin(ctx.header['x-wx-code']);
+        const weToken = await wecaht.weGetAccessToken();
+        const userinfo = wecaht.decryptData(ctx.header['x-wx-encrypted-data'], ctx.header['x-wx-iv'], loginData.session_key);
+        delete userinfo.watermark;
+        loginData.userinfo = userinfo;
+        ctx.body = {
+            code: 0,
+            data: loginData,
+            
+        }
     }
 }
 export default new Wechat();

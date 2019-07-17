@@ -5,7 +5,7 @@
  * Created Date: 2019-01-08 15:47:13
  * Description : 
  * -----
- * Last Modified: 2019-01-09 11:13:48
+ * Last Modified: 2019-07-17 10:53:32
  * Modified By  : 
  * -----
  * Copyright (c) 2018 Huazhi Corporation. All rights reserved.
@@ -13,6 +13,9 @@
 const ENV_DEFAULT = 'dev';
 const PORT_DEFAULT = 6060;
 import * as http from 'http';
+import * as https from 'https';
+import * as fs from 'fs';
+import * as path from 'path';
 const debug: any = require('debug')('demo:server');
 class Server {
     private port : number;//默认端口
@@ -20,6 +23,7 @@ class Server {
     private env : string;//默认环境
     private config : any;
     private app : any;
+    private httpsOption: any;
     constructor(){
         this.env = ENV_DEFAULT;
         this.port = PORT_DEFAULT;
@@ -33,7 +37,10 @@ class Server {
             this.env = process.env.NODE_ENV
         }
         this.config  = require(`../config/config.${this.env}`).default;
-
+        this.httpsOption = {
+            key : fs.readFileSync(path.resolve(__dirname, "../config/https/2_m.terrorblade.xyz.key")),
+            cert: fs.readFileSync(path.resolve(__dirname, "../config/https/1_m.terrorblade.xyz_bundle.crt")),
+        };
         //设置全局变量
         global['env'] = this.env;
         global['port'] = this.port = this.config.configuration.port;
@@ -42,6 +49,7 @@ class Server {
     };
     private start():void{
         this.createHttp();
+        this.createHttps();
         this.server.on('error',this.onerror);
         this.server.on('error',this.onListening);
     };
@@ -49,6 +57,11 @@ class Server {
         this.server = http.createServer(this.app.callback());
         this.server.listen(this.port);
         console.info(`server start listen on ${this.port}`);
+    };
+    private createHttps(): void{
+        this.server = https.createServer(this.httpsOption, this.app.callback());
+        this.server.listen(443);
+        console.info(`server start listen on 443`);
     };
     private onerror(error:any):void{
         const that=this;
