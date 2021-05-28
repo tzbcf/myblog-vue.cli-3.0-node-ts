@@ -11,7 +11,7 @@
     "axios": "^0.18.0",
     "core-js": "^2.5.7",
     "element-ui": "^2.6.3",
-    "tinymce": "4.9.2",
+    "tinymce": "5.7.1",
     "vue": "^2.6.6",
     "vue-class-component": "^6.0.0",
     "vue-property-decorator": "^7.0.0",
